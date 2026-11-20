@@ -1,0 +1,2640 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REVIEW OF UNIT 4 | Luxury English Learning Suite</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Playfair Display for Luxury Headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <!-- Chart.js for Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Socket.io Client for Real-Time Online Chat -->
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        ivory: '#FDFBF7',
+                        gold: {
+                            50: '#FCF9EE',
+                            100: '#F7EED3',
+                            200: '#EEDB9F',
+                            300: '#E3C365',
+                            400: '#D4AF37',
+                            500: '#B89225',
+                            600: '#96721B',
+                        },
+                        charcoal: '#1E2022',
+                        slate: '#4A5568'
+                    },
+                    boxShadow: {
+                        'luxury': '0 10px 40px -10px rgba(212, 175, 55, 0.15)',
+                        'gold-glow': '0 0 20px rgba(212, 175, 55, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Luxury Styling & Quality Tiers */
+        body {
+            background-color: #FDFBF7;
+            color: #1E2022;
+            overflow-x: hidden;
+        }
+
+        /* Quality Tier: High (Ultra Luxury) */
+        body.quality-high .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.28);
+            box-shadow: 0 12px 36px -8px rgba(212, 175, 55, 0.14), 0 4px 12px rgba(0, 0, 0, 0.03);
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        body.quality-high .glass-card:hover {
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 18px 44px -10px rgba(212, 175, 55, 0.22);
+        }
+
+        /* Quality Tier: Medium (Balanced) */
+        body.quality-medium .glass-card {
+            background: #FFFFFF;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        /* Quality Tier: Low (Performance) */
+        body.quality-low .glass-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            box-shadow: none;
+            transition: none !important;
+        }
+        body.quality-low * {
+            animation: none !important;
+            transition: none !important;
+        }
+
+        /* Gold Shimmer Text */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #B89225 0%, #D4AF37 50%, #96721B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #D4AF37 0%, #B89225 100%);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FDFBF7;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E3C365;
+            border-radius: 999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        /* Word Chip Animations */
+        .word-chip {
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            user-select: none;
+        }
+        .word-chip:active {
+            transform: scale(0.94);
+        }
+
+        /* Tab Fade Animation */
+        @keyframes fadeInSlide {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .tab-panel {
+            animation: fadeInSlide 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+    </style>
+</head>
+<body class="quality-high min-h-screen relative selection:bg-gold-200 selection:text-charcoal">
+
+    <!-- Ambient Gold Dust Canvas (Active in High Quality) -->
+    <canvas id="gold-particles" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- ========================================================= -->
+    <!-- WELCOME NAME MODAL (POPUP NHẬP TÊN KHI VÀO WEB)           -->
+    <!-- ========================================================= -->
+    <div id="welcome-modal" class="fixed inset-0 z-50 bg-charcoal/70 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-8 border-2 border-gold-300 shadow-2xl text-center relative overflow-hidden">
+            <div class="w-16 h-16 rounded-2xl gold-gradient-bg text-white flex items-center justify-center mx-auto mb-5 shadow-gold-glow">
+                <i class="fa-solid fa-crown text-2xl"></i>
+            </div>
+            <span class="text-xs font-bold uppercase tracking-[0.2em] text-gold-500 block mb-1">Phòng Ôn Tập Trực Tuyến</span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-charcoal mb-2">REVIEW OF UNIT 4</h2>
+            <p class="text-slate text-sm mb-6">Nhập tên hiển thị của bạn để bắt đầu làm bài từng câu và tham gia diễn đàn thảo luận cùng cả lớp.</p>
+
+            <div class="space-y-4 text-left">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-charcoal mb-1.5">Tên hiển thị của bạn</label>
+                    <input type="text" id="welcome-name-input" placeholder="Ví dụ: Minh Anh 8A1..." maxlength="30"
+                        onkeydown="if(event.key==='Enter') submitWelcomeName()"
+                        class="w-full px-4 py-3.5 rounded-xl border-2 border-gold-200 focus:border-gold-500 focus:outline-none text-charcoal font-medium bg-ivory/60 transition">
+                </div>
+                <button onclick="submitWelcomeName()"
+                    class="w-full py-3.5 rounded-xl gold-gradient-bg text-white font-bold text-sm shadow-gold-glow hover:opacity-95 active:scale-[0.99] transition flex items-center justify-center space-x-2">
+                    <span>Bắt Đầu Ôn Tập & Kết Nối</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Luxury Navigation Bar -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gold-200/70 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Brand / Title -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-11 h-11 rounded-xl gold-gradient-bg flex items-center justify-center text-white shadow-gold-glow">
+                        <i class="fa-solid fa-crown text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="text-[11px] font-bold tracking-[0.2em] uppercase text-gold-500 block">Ethnic Groups of Viet Nam</span>
+                        <h1 class="font-serif text-xl sm:text-2xl font-bold text-charcoal tracking-tight">REVIEW OF UNIT 4</h1>
+                    </div>
+                </div>
+
+                <!-- Right Controls: User Badge, Progress Pill, Sound Toggle, Settings -->
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <!-- Active User Badge -->
+                    <button onclick="openWelcomeModalForEdit()" title="Đổi tên hiển thị"
+                        class="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-full bg-ivory border border-gold-200 hover:border-gold-400 text-xs font-semibold text-charcoal transition">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span id="header-username-display">Học sinh</span>
+                    </button>
+
+                    <!-- Overall Progress Pill -->
+                    <div class="hidden lg:flex items-center bg-gold-50 border border-gold-200 px-4 py-1.5 rounded-full space-x-3">
+                        <span class="text-xs font-medium text-slate">Tiến độ:</span>
+                        <div class="w-24 h-2 bg-gold-100 rounded-full overflow-hidden">
+                            <div id="header-progress-bar" class="h-full gold-gradient-bg transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                        <span id="header-progress-text" class="text-xs font-bold text-gold-600">0/48</span>
+                    </div>
+
+                    <!-- Quick Sound Toggle -->
+                    <button onclick="toggleMute()" id="btn-sound-toggle" title="Bật / Tắt âm thanh"
+                        class="w-10 h-10 rounded-xl border border-gold-200 bg-white hover:bg-gold-50 text-gold-600 flex items-center justify-center transition shadow-sm">
+                        <i id="sound-icon" class="fa-solid fa-volume-high"></i>
+                    </button>
+
+                    <!-- Settings Button -->
+                    <button onclick="openSettingsModal()" title="Cài đặt hiệu ứng & thứ tự câu hỏi"
+                        class="px-3.5 py-2.5 rounded-xl border border-gold-300 bg-gold-50/70 hover:bg-gold-100 text-charcoal font-medium text-sm flex items-center space-x-2 transition shadow-sm">
+                        <i class="fa-solid fa-sliders text-gold-500"></i>
+                        <span class="hidden sm:inline">Cài đặt</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Roman Numeral Section Navigation Tabs -->
+            <nav class="flex space-x-1 sm:space-x-2 overflow-x-auto pb-3 pt-1 no-scrollbar" aria-label="Tabs">
+                <button onclick="switchTab('tab-1')" id="nav-tab-1"
+                    class="nav-tab active-tab flex-shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center space-x-2 transition">
+                    <span class="w-6 h-6 rounded-lg flex items-center justify-center text-xs font-serif font-bold tab-badge">I</span>
+                    <span>Multiple Choice</span>
+                    <span id="badge-sec1" class="text-xs px-2 py-0.5 rounded-full bg-black/5">0/22</span>
+                </button>
+
+                <button onclick="switchTab('tab-2')" id="nav-tab-2"
+                    class="nav-tab flex-shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center space-x-2 transition">
+                    <span class="w-6 h-6 rounded-lg flex items-center justify-center text-xs font-serif font-bold tab-badge">II</span>
+                    <span>Word Form</span>
+                    <span id="badge-sec2" class="text-xs px-2 py-0.5 rounded-full bg-black/5">0/16</span>
+                </button>
+
+                <button onclick="switchTab('tab-3')" id="nav-tab-3"
+                    class="nav-tab flex-shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center space-x-2 transition">
+                    <span class="w-6 h-6 rounded-lg flex items-center justify-center text-xs font-serif font-bold tab-badge">III</span>
+                    <span>Write (Sắp xếp câu)</span>
+                    <span id="badge-sec3" class="text-xs px-2 py-0.5 rounded-full bg-black/5">0/10</span>
+                </button>
+
+                <button onclick="switchTab('tab-4')" id="nav-tab-4"
+                    class="nav-tab flex-shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center space-x-2 transition">
+                    <span class="w-6 h-6 rounded-lg flex items-center justify-center text-xs font-serif font-bold tab-badge">IV</span>
+                    <span>Phân Tích & Lộ Trình</span>
+                    <i class="fa-solid fa-chart-pie text-gold-500 text-xs"></i>
+                </button>
+
+                <button onclick="switchTab('tab-5')" id="nav-tab-5"
+                    class="nav-tab flex-shrink-0 px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center space-x-2 transition">
+                    <span class="w-6 h-6 rounded-lg flex items-center justify-center text-xs font-serif font-bold tab-badge">V</span>
+                    <span>Diễn Đàn Thảo Luận</span>
+                    <span id="forum-unread-dot" class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- ========================================================= -->
+        <!-- SECTION I: MULTIPLE CHOICE (STEP-BY-STEP CARD MODE)       -->
+        <!-- ========================================================= -->
+        <section id="tab-1" class="tab-panel space-y-6">
+            <div class="glass-card rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-l-4 border-l-gold-400">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gold-500">Phần I La Mã • Chế độ Từng Câu Một</span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-charcoal mt-1">I. Multiple Choice</h2>
+                    <p class="text-slate text-sm mt-1">Trả lời câu hỏi hiện tại để mở khóa và chuyển sang câu tiếp theo.</p>
+                </div>
+
+                <!-- Order Mode Switcher -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 bg-ivory p-1.5 rounded-xl border border-gold-200">
+                    <button onclick="setOrderMode('sequential')" class="order-mode-btn-seq px-3.5 py-2 rounded-lg text-xs font-bold flex items-center justify-center space-x-1.5 transition">
+                        <i class="fa-solid fa-arrow-down-1-9"></i>
+                        <span>Đúng thứ tự</span>
+                    </button>
+                    <button onclick="setOrderMode('random')" class="order-mode-btn-rnd px-3.5 py-2 rounded-lg text-xs font-bold flex items-center justify-center space-x-1.5 transition">
+                        <i class="fa-solid fa-shuffle"></i>
+                        <span>Ngẫu nhiên</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step-by-Step Single Question Container -->
+            <div id="mc-container"></div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SECTION II: WORD FORM (TABLE + STEP-BY-STEP CARD MODE)    -->
+        <!-- ========================================================= -->
+        <section id="tab-2" class="tab-panel hidden space-y-6">
+            <div class="glass-card rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-l-4 border-l-gold-400">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gold-500">Phần II La Mã • Chế độ Từng Câu Một</span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-charcoal mt-1">II. Word Form</h2>
+                    <p class="text-slate text-sm mt-1">Chia dạng đúng của từ trong ngoặc và kiểm tra từng câu một.</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-2.5">
+                    <button onclick="toggleWordTable()" class="px-4 py-2.5 rounded-xl bg-gold-50 border border-gold-300 hover:bg-gold-100 text-gold-600 font-semibold text-xs sm:text-sm flex items-center space-x-2 transition shadow-sm">
+                        <i class="fa-solid fa-table-list"></i>
+                        <span id="btn-word-table-text">Mở Bảng Từ Loại</span>
+                    </button>
+                    <div class="flex items-center gap-1.5 bg-ivory p-1 rounded-xl border border-gold-200">
+                        <button onclick="setOrderMode('sequential')" class="order-mode-btn-seq px-3 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-1 transition">
+                            <i class="fa-solid fa-arrow-down-1-9"></i>
+                            <span>Đúng thứ tự</span>
+                        </button>
+                        <button onclick="setOrderMode('random')" class="order-mode-btn-rnd px-3 py-1.5 rounded-lg text-xs font-bold flex items-center space-x-1 transition">
+                            <i class="fa-solid fa-shuffle"></i>
+                            <span>Ngẫu nhiên</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Collapsible Reference Word Family Table -->
+            <div id="word-family-drawer" class="hidden glass-card rounded-2xl p-6 overflow-hidden border border-gold-300">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-serif text-lg font-bold text-charcoal flex items-center gap-2">
+                        <i class="fa-solid fa-book-open text-gold-500"></i>
+                        Bảng Hệ Thống Gia Đình Từ (Word Family Matrix)
+                    </h3>
+                    <button onclick="toggleWordTable()" class="text-slate hover:text-charcoal text-sm"><i class="fa-solid fa-xmark text-lg"></i></button>
+                </div>
+                <div class="overflow-x-auto rounded-xl border border-gold-200">
+                    <table class="w-full text-sm text-left">
+                        <thead class="bg-gold-50 text-charcoal font-bold uppercase text-xs border-b border-gold-200">
+                            <tr>
+                                <th class="px-4 py-3">Verb (Động từ)</th>
+                                <th class="px-4 py-3">Noun (Danh từ)</th>
+                                <th class="px-4 py-3">Adjective (Tính từ)</th>
+                                <th class="px-4 py-3">Adverb (Trạng từ)</th>
+                                <th class="px-4 py-3">Meaning (Nghĩa)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gold-100 bg-white">
+                            <tr class="hover:bg-gold-50/40">
+                                <td class="px-4 py-2.5 font-medium">interest</td>
+                                <td class="px-4 py-2.5">interest</td>
+                                <td class="px-4 py-2.5">interesting / interested</td>
+                                <td class="px-4 py-2.5">interestingly</td>
+                                <td class="px-4 py-2.5 text-slate">làm thích thú / quan tâm</td>
+                            </tr>
+                            <tr class="hover:bg-gold-50/40">
+                                <td class="px-4 py-2.5 font-medium">popularise / popularize</td>
+                                <td class="px-4 py-2.5">popularity</td>
+                                <td class="px-4 py-2.5">popular</td>
+                                <td class="px-4 py-2.5">popularly</td>
+                                <td class="px-4 py-2.5 text-slate">phổ biến / được ưa chuộng</td>
+                            </tr>
+                            <tr class="hover:bg-gold-50/40">
+                                <td class="px-4 py-2.5 text-gray-400">—</td>
+                                <td class="px-4 py-2.5 font-medium">culture</td>
+                                <td class="px-4 py-2.5">cultural</td>
+                                <td class="px-4 py-2.5">culturally</td>
+                                <td class="px-4 py-2.5 text-slate">văn hóa</td>
+                            </tr>
+                            <tr class="hover:bg-gold-50/40">
+                                <td class="px-4 py-2.5 text-gray-400">—</td>
+                                <td class="px-4 py-2.5 font-medium">importance</td>
+                                <td class="px-4 py-2.5">important</td>
+                                <td class="px-4 py-2.5">importantly</td>
+                                <td class="px-4 py-2.5 text-slate">tầm quan trọng</td>
+                            </tr>
+                            <tr class="hover:bg-gold-50/40">
+                                <td class="px-4 py-2.5 text-gray-400">—</td>
+                                <td class="px-4 py-2.5 font-medium">music / musician</td>
+                                <td class="px-4 py-2.5">musical</td>
+                                <td class="px-4 py-2.5">musically</td>
+                                <td class="px-4 py-2.5 text-slate">âm nhạc / nhạc sĩ</td>
+                            </tr>
+                            <tr class="hover:bg-gold-50/40">
+                                <td class="px-4 py-2.5 font-medium">decorate</td>
+                                <td class="px-4 py-2.5">decoration / decorator</td>
+                                <td class="px-4 py-2.5">decorative</td>
+                                <td class="px-4 py-2.5">decoratively</td>
+                                <td class="px-4 py-2.5 text-slate">trang trí</td>
+                            </tr>
+                            <tr class="hover:bg-gold-50/40">
+                                <td class="px-4 py-2.5 text-gray-400">—</td>
+                                <td class="px-4 py-2.5 font-medium">nature</td>
+                                <td class="px-4 py-2.5">natural</td>
+                                <td class="px-4 py-2.5">naturally</td>
+                                <td class="px-4 py-2.5 text-slate">tự nhiên / thiên nhiên</td>
+                            </tr>
+                            <tr class="hover:bg-gold-50/40">
+                                <td class="px-4 py-2.5 font-medium">strengthen</td>
+                                <td class="px-4 py-2.5">strength</td>
+                                <td class="px-4 py-2.5">strong</td>
+                                <td class="px-4 py-2.5">strongly</td>
+                                <td class="px-4 py-2.5 text-slate">củng cố / sức mạnh</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Step-by-Step Word Form Container -->
+            <div id="wf-container"></div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SECTION III: WRITE - SENTENCE ARRANGEMENT (STEP-BY-STEP)  -->
+        <!-- ========================================================= -->
+        <section id="tab-3" class="tab-panel hidden space-y-6">
+            <div class="glass-card rounded-2xl p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-l-4 border-l-gold-400">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gold-500">Phần III La Mã • Chế độ Từng Câu Một</span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-charcoal mt-1">III. Write (Sắp xếp câu hoàn chỉnh)</h2>
+                    <p class="text-slate text-sm mt-1">Ghép các thẻ từ thành câu chuẩn xác và kiểm tra để sang câu tiếp theo.</p>
+                </div>
+
+                <!-- Order Mode Switcher -->
+                <div class="flex items-center gap-2 bg-ivory p-1.5 rounded-xl border border-gold-200">
+                    <button onclick="setOrderMode('sequential')" class="order-mode-btn-seq px-3.5 py-2 rounded-lg text-xs font-bold flex items-center space-x-1.5 transition">
+                        <i class="fa-solid fa-arrow-down-1-9"></i>
+                        <span>Đúng thứ tự</span>
+                    </button>
+                    <button onclick="setOrderMode('random')" class="order-mode-btn-rnd px-3.5 py-2 rounded-lg text-xs font-bold flex items-center space-x-1.5 transition">
+                        <i class="fa-solid fa-shuffle"></i>
+                        <span>Ngẫu nhiên</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step-by-Step Sentence Builder Container -->
+            <div id="write-container"></div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SECTION IV: ANALYTICS DASHBOARD & STUDY ROADMAP           -->
+        <!-- ========================================================= -->
+        <section id="tab-4" class="tab-panel hidden space-y-6">
+            <!-- Header Banner -->
+            <div class="glass-card rounded-2xl p-6 sm:p-8 border-l-4 border-l-gold-400 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gold-500">Phần IV • Hệ Thống Chẩn Đoán Thông Minh</span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-charcoal mt-1">IV. Phân Tích Kết Quả & Phương Hướng Ôn Tập</h2>
+                    <p class="text-slate text-sm mt-1">Thống kê trực quan số câu đúng, sai và đề xuất lộ trình cải thiện điểm số cá nhân hóa.</p>
+                </div>
+                <button onclick="runDeepAnalysis()" class="px-6 py-3.5 rounded-xl gold-gradient-bg text-white font-bold text-sm shadow-gold-glow hover:scale-[1.02] active:scale-[0.98] transition flex items-center justify-center space-x-2.5">
+                    <i class="fa-solid fa-wand-magic-sparkles text-base"></i>
+                    <span>Phân Tích Chuyên Sâu & Đề Xuất Phương Hướng Học</span>
+                </button>
+            </div>
+
+            <!-- 4 KPI Cards -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate">Tổng Điểm</span>
+                        <div class="w-8 h-8 rounded-lg bg-gold-50 text-gold-500 flex items-center justify-center"><i class="fa-solid fa-award"></i></div>
+                    </div>
+                    <div id="kpi-score" class="text-3xl font-serif font-bold text-charcoal mt-2">0.0 <span class="text-sm font-sans font-normal text-slate">/ 10</span></div>
+                    <p id="kpi-rank" class="text-xs text-gold-600 font-medium mt-1">Chưa hoàn thành bài thi</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate">Số Câu Đúng</span>
+                        <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center"><i class="fa-solid fa-circle-check"></i></div>
+                    </div>
+                    <div id="kpi-correct" class="text-3xl font-bold text-emerald-600 mt-2">0</div>
+                    <p class="text-xs text-slate mt-1">Trên tổng số 48 câu hỏi</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate">Số Câu Sai</span>
+                        <div class="w-8 h-8 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center"><i class="fa-solid fa-circle-xmark"></i></div>
+                    </div>
+                    <div id="kpi-wrong" class="text-3xl font-bold text-rose-600 mt-2">0</div>
+                    <p class="text-xs text-slate mt-1">Cần xem lại giải thích</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-5">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-semibold uppercase tracking-wider text-slate">Chưa Làm</span>
+                        <div class="w-8 h-8 rounded-lg bg-gray-100 text-gray-500 flex items-center justify-center"><i class="fa-solid fa-hourglass-half"></i></div>
+                    </div>
+                    <div id="kpi-unanswered" class="text-3xl font-bold text-charcoal mt-2">48</div>
+                    <p class="text-xs text-slate mt-1">Câu hỏi còn trống</p>
+                </div>
+            </div>
+
+            <!-- Charts Grid: Doughnut (Quạt/Tròn) & Bar (Cột) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Pie/Doughnut Chart -->
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="font-serif text-lg font-bold text-charcoal mb-1">Biểu Đồ Quạt: Tỷ Lệ Đúng / Sai Tổng Thể</h3>
+                    <p class="text-xs text-slate mb-4">Phân bổ trạng thái toàn bộ 48 câu hỏi trong đề cương Unit 4</p>
+                    <div class="relative h-64 w-full flex items-center justify-center">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Bar Chart -->
+                <div class="glass-card rounded-2xl p-6">
+                    <h3 class="font-serif text-lg font-bold text-charcoal mb-1">Biểu Đồ Cột: Hiệu Suất Từng Phần La Mã</h3>
+                    <p class="text-xs text-slate mb-4">So sánh số câu đúng, sai và chưa làm theo từng chuyên đề</p>
+                    <div class="relative h-64 w-full">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personalized AI / Algorithmic Roadmap Output -->
+            <div id="analysis-result-box" class="hidden glass-card rounded-2xl p-6 sm:p-8 border-2 border-gold-300 bg-gradient-to-br from-white via-gold-50/40 to-white">
+                <div class="flex items-center space-x-3 border-b border-gold-200 pb-4 mb-6">
+                    <div class="w-10 h-10 rounded-xl gold-gradient-bg text-white flex items-center justify-center shadow-sm">
+                        <i class="fa-solid fa-compass"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-serif text-xl font-bold text-charcoal">Báo Cáo Chẩn Đoán & Lộ Trình Học Tập Cá Nhân Hóa</h3>
+                        <p class="text-xs text-slate">Dựa trên dữ liệu câu trả lời thực tế của bạn trong Unit 4</p>
+                    </div>
+                </div>
+
+                <div id="analysis-content" class="space-y-5"></div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SECTION V: REAL-TIME DISCUSSION FORUM (DIỄN ĐÀN)          -->
+        <!-- ========================================================= -->
+        <section id="tab-5" class="tab-panel hidden space-y-6">
+            <div class="glass-card rounded-2xl p-6 border-l-4 border-l-gold-400 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-gold-500">Phần V • Kết Nối Trực Tuyến Thời Gian Thực</span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-charcoal mt-1">V. Diễn Đàn Thảo Luận & Hỏi Đáp</h2>
+                    <p class="text-slate text-sm mt-1">Trao đổi bài tập, chia sẻ mẹo ghi nhớ từ loại và giải đáp thắc mắc cùng bạn bè theo thời gian thực.</p>
+                </div>
+                <div class="flex items-center space-x-2 bg-emerald-50 border border-emerald-200 px-3.5 py-2 rounded-xl">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                    <span id="forum-connection-status" class="text-xs font-bold text-emerald-800">Đang kết nối máy chủ...</span>
+                </div>
+            </div>
+
+            <!-- Forum Grid: Left Active Members / Quick Share, Right Live Chat Stream -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Left Sidebar: Profile & Quick Study Tags -->
+                <div class="space-y-4">
+                    <div class="glass-card rounded-2xl p-5 space-y-4">
+                        <div class="flex items-center space-x-3 border-b border-gold-100 pb-3">
+                            <div class="w-10 h-10 rounded-xl gold-gradient-bg text-white font-serif font-bold flex items-center justify-center text-lg" id="forum-avatar-letter">H</div>
+                            <div>
+                                <div class="text-xs text-slate">Đang thảo luận với tên</div>
+                                <div id="forum-my-name" class="font-bold text-charcoal text-sm">Học sinh</div>
+                            </div>
+                        </div>
+                        <button onclick="openWelcomeModalForEdit()" class="w-full py-2 px-3 rounded-xl border border-gold-300 bg-gold-50/70 hover:bg-gold-100 text-gold-600 text-xs font-bold transition">
+                            <i class="fa-solid fa-pen-to-square mr-1.5"></i>Đổi tên hiển thị
+                        </button>
+                    </div>
+
+                    <!-- Quick Topic Filters / Prompt Helpers -->
+                    <div class="glass-card rounded-2xl p-5 space-y-3">
+                        <h3 class="font-serif font-bold text-charcoal text-base flex items-center gap-2">
+                            <i class="fa-solid fa-sparkles text-gold-500"></i>
+                            Gợi Ý Hỏi Nhanh
+                        </h3>
+                        <p class="text-xs text-slate">Bấm vào mẫu câu dưới đây để điền nhanh vào khung thảo luận:</p>
+                        <div class="space-y-2">
+                            <button onclick="insertForumTemplate('Mọi người ơi, giải thích giúp mình câu này ở Phần I với: ')"
+                                class="w-full text-left p-2.5 rounded-xl bg-ivory hover:bg-gold-50 border border-gold-200 text-xs font-medium text-charcoal transition">
+                                "Mọi người ơi, giải thích giúp mình câu này ở Phần I với..."
+                            </button>
+                            <button onclick="insertForumTemplate('Phần II Word Form từ gốc này chia như thế nào vậy cả lớp? ')"
+                                class="w-full text-left p-2.5 rounded-xl bg-ivory hover:bg-gold-50 border border-gold-200 text-xs font-medium text-charcoal transition">
+                                "Phần II Word Form từ gốc này chia như thế nào vậy..."
+                            </button>
+                            <button onclick="insertForumTemplate('Mình vừa hoàn thành bài ôn tập Unit 4 được điểm: ')"
+                                class="w-full text-left p-2.5 rounded-xl bg-ivory hover:bg-gold-50 border border-gold-200 text-xs font-medium text-charcoal transition">
+                                "Mình vừa hoàn thành bài ôn tập Unit 4 được điểm..."
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Main Chat Box -->
+                <div class="lg:col-span-2 glass-card rounded-2xl flex flex-col h-[540px] overflow-hidden border border-gold-300">
+                    <!-- Chat Header -->
+                    <div class="px-5 py-3.5 bg-gradient-to-r from-charcoal to-gray-800 text-white flex items-center justify-between">
+                        <div class="flex items-center space-x-2.5">
+                            <i class="fa-solid fa-comments text-gold-400"></i>
+                            <span class="font-serif font-bold text-sm sm:text-base">Phòng Thảo Luận Chung — Unit 4</span>
+                        </div>
+                        <span id="forum-msg-count" class="text-xs bg-white/10 px-2.5 py-1 rounded-full text-gold-300 font-medium">0 tin nhắn</span>
+                    </div>
+
+                    <!-- Messages Stream -->
+                    <div id="forum-messages-box" class="flex-1 p-5 overflow-y-auto space-y-3.5 bg-ivory/50">
+                        <div class="text-center text-xs text-slate py-8">Đang tải lịch sử thảo luận...</div>
+                    </div>
+
+                    <!-- Chat Input Form -->
+                    <form onsubmit="sendForumMessage(event)" class="p-3.5 bg-white border-t border-gold-200 flex items-center gap-2.5">
+                        <input type="text" id="forum-input" placeholder="Nhập câu hỏi, đáp án hoặc lời nhắn cho mọi người..." autocomplete="off"
+                            class="flex-1 px-4 py-3 rounded-xl border border-gold-200 focus:border-gold-500 focus:outline-none text-sm bg-ivory/40">
+                        <button type="submit" class="px-5 py-3 rounded-xl gold-gradient-bg text-white font-bold text-sm shadow-sm hover:opacity-95 transition flex items-center space-x-2">
+                            <span>Gửi</span>
+                            <i class="fa-solid fa-paper-plane text-xs"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ========================================================= -->
+    <!-- SETTINGS MODAL (QUALITY TIER, AUDIO, ORDER MODE, RESET)   -->
+    <!-- ========================================================= -->
+    <div id="settings-modal" class="fixed inset-0 z-50 hidden bg-charcoal/50 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 border border-gold-300 shadow-2xl transform transition-all">
+            <div class="flex justify-between items-center border-b border-gold-100 pb-4 mb-5">
+                <div class="flex items-center space-x-2.5">
+                    <i class="fa-solid fa-sliders text-gold-500 text-lg"></i>
+                    <h3 class="font-serif text-xl font-bold text-charcoal">Cài Đặt Trải Nghiệm</h3>
+                </div>
+                <button onclick="closeSettingsModal()" class="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center text-slate">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Question Sequence Mode -->
+                <div>
+                    <label class="block text-sm font-bold text-charcoal mb-2">Thứ Tự Hiển Thị Câu Hỏi</label>
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <button onclick="setOrderMode('sequential')" class="order-mode-btn-seq p-3 rounded-xl border text-center transition">
+                            <i class="fa-solid fa-arrow-down-1-9 text-gold-500 block mb-1"></i>
+                            <span class="text-xs font-bold block">Đúng thứ tự</span>
+                            <span class="text-[10px] text-slate">Theo đề cương (1 → N)</span>
+                        </button>
+                        <button onclick="setOrderMode('random')" class="order-mode-btn-rnd p-3 rounded-xl border text-center transition">
+                            <i class="fa-solid fa-shuffle text-gold-500 block mb-1"></i>
+                            <span class="text-xs font-bold block">Ngẫu nhiên</span>
+                            <span class="text-[10px] text-slate">Xáo trộn câu hỏi</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Graphics Quality Selector -->
+                <div>
+                    <label class="block text-sm font-bold text-charcoal mb-2">Chất Lượng Hiệu Ứng Đồ Họa</label>
+                    <div class="grid grid-cols-3 gap-2.5">
+                        <button onclick="setQuality('high')" id="q-btn-high" class="q-btn p-3 rounded-xl border text-center transition">
+                            <i class="fa-solid fa-gem text-gold-500 block mb-1"></i>
+                            <span class="text-xs font-bold block">Cao (Ultra)</span>
+                            <span class="text-[10px] text-slate">Kính mờ & Hạt vàng</span>
+                        </button>
+                        <button onclick="setQuality('medium')" id="q-btn-medium" class="q-btn p-3 rounded-xl border text-center transition">
+                            <i class="fa-solid fa-feather text-gold-500 block mb-1"></i>
+                            <span class="text-xs font-bold block">Trung Bình</span>
+                            <span class="text-[10px] text-slate">Mượt & Tiết kiệm pin</span>
+                        </button>
+                        <button onclick="setQuality('low')" id="q-btn-low" class="q-btn p-3 rounded-xl border text-center transition">
+                            <i class="fa-solid fa-bolt text-gold-500 block mb-1"></i>
+                            <span class="text-xs font-bold block">Tối Giản</span>
+                            <span class="text-[10px] text-slate">Tốc độ tối đa</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sound Volume Control -->
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label class="text-sm font-bold text-charcoal">Âm Lượng Hiệu Ứng (Web Audio)</label>
+                        <span id="volume-label" class="text-xs font-bold text-gold-600">70%</span>
+                    </div>
+                    <input type="range" id="volume-slider" min="0" max="100" value="70" oninput="updateVolume(this.value)"
+                        class="w-full accent-gold-400 cursor-pointer">
+                </div>
+
+                <!-- Reset Progress Section -->
+                <div class="pt-4 border-t border-gold-100">
+                    <div id="reset-confirm-area">
+                        <button onclick="showResetConfirm()" class="w-full py-2.5 px-4 rounded-xl border border-rose-200 bg-rose-50/60 hover:bg-rose-100 text-rose-600 font-semibold text-sm transition flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            <span>Làm Mới Toàn Bộ Bài Làm</span>
+                        </button>
+                    </div>
+                    <div id="reset-double-check" class="hidden bg-rose-50 border border-rose-200 rounded-xl p-3 text-center space-y-2.5">
+                        <p class="text-xs font-medium text-rose-800">Toàn bộ đáp án đã chọn và điểm số sẽ bị xóa. Bạn chắc chắn chứ?</p>
+                        <div class="flex space-x-2 justify-center">
+                            <button onclick="executeReset()" class="px-4 py-1.5 rounded-lg bg-rose-600 text-white text-xs font-bold hover:bg-rose-700">Xác nhận xóa</button>
+                            <button onclick="cancelResetConfirm()" class="px-4 py-1.5 rounded-lg bg-white border border-gray-300 text-charcoal text-xs font-semibold">Hủy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-charcoal text-white px-5 py-3 rounded-2xl shadow-xl border border-gold-400/50 flex items-center space-x-3">
+            <i id="toast-icon" class="fa-solid fa-circle-info text-gold-400"></i>
+            <span id="toast-msg" class="text-sm font-medium">Thông báo</span>
+        </div>
+    </div>
+
+    <script>
+        /* =========================================================================
+           1B. SOCKET.IO REAL-TIME FORUM CONNECTOR
+           ========================================================================= */
+        // Đặt URL máy chủ Socket.io (ví dụ: 'https://ten-server-cua-ban.onrender.com').
+        // Để trống '' để tự kết nối tới cùng domain/port (khi chạy chung với server.js).
+        const SOCKET_SERVER_URL = '';
+
+        let socketClient = null;
+        let socketConnected = false;
+        let socketForumHistory = [];
+
+        function initSocketForum() {
+            const statusEl = document.getElementById('forum-connection-status');
+            if (typeof window.io !== 'function') {
+                if (statusEl) statusEl.innerText = 'Chế độ ngoại tuyến (Local)';
+                return;
+            }
+
+            try {
+                socketClient = SOCKET_SERVER_URL
+                    ? window.io(SOCKET_SERVER_URL, { transports: ['websocket', 'polling'] })
+                    : window.io({ transports: ['websocket', 'polling'] });
+
+                socketClient.on('connect', () => {
+                    socketConnected = true;
+                    if (statusEl) statusEl.innerText = 'Đang chat online (Socket.io)';
+                    if (appState.username) {
+                        socketClient.emit('forum_join', { username: appState.username });
+                    }
+                });
+
+                socketClient.on('disconnect', () => {
+                    socketConnected = false;
+                    if (statusEl) statusEl.innerText = 'Mất kết nối Socket (Đang dùng Local)';
+                });
+
+                socketClient.on('connect_error', () => {
+                    socketConnected = false;
+                    if (statusEl) statusEl.innerText = 'Chế độ ngoại tuyến (Local)';
+                });
+
+                socketClient.on('forum_history', (historyList) => {
+                    if (Array.isArray(historyList)) {
+                        socketForumHistory = historyList;
+                        if (typeof window.renderForumMessages === 'function') {
+                            window.renderForumMessages(socketForumHistory);
+                        }
+                    }
+                });
+
+                socketClient.on('forum_message', (msgObj) => {
+                    if (!msgObj) return;
+                    socketForumHistory.push(msgObj);
+                    if (socketForumHistory.length > 100) {
+                        socketForumHistory.shift();
+                    }
+                    if (typeof window.renderForumMessages === 'function') {
+                        window.renderForumMessages(socketForumHistory);
+                    }
+                });
+            } catch (err) {
+                console.warn('Socket.io init failed, falling back to local mode:', err);
+                if (statusEl) statusEl.innerText = 'Chế độ ngoại tuyến (Local)';
+            }
+        }
+
+        window.postToSocketForum = function(payload) {
+            if (!socketClient || !socketConnected) return false;
+            try {
+                socketClient.emit('forum_message', {
+                    ...payload,
+                    createdAtMs: Date.now()
+                });
+                return true;
+            } catch (err) {
+                console.error('Error emitting Socket.io message:', err);
+                return false;
+            }
+        };
+    </script>
+
+    <script>
+        /* =========================================================================
+           4. RENDERING SECTIONS I, II, III (STRICT STEP-BY-STEP SINGLE QUESTION)
+           ========================================================================= */
+        function isMCItemCompleted(qId) {
+            return appState.mcAnswers[qId] !== undefined;
+        }
+
+        function isWFItemCompleted(qId) {
+            const st = appState.wfAnswers[qId];
+            return Boolean(st && st.isCorrect !== null);
+        }
+
+        function isWriteItemCompleted(qId) {
+            const st = appState.writeAnswers[qId];
+            return Boolean(st && st.isCorrect !== null);
+        }
+
+        function jumpStepQuestion(section, targetIdx) {
+            playSound('click');
+            if (section === 'mc') {
+                const maxIdx = appState.sec1Order.length - 1;
+                const clamped = Math.max(0, Math.min(maxIdx, targetIdx));
+                // Allow moving backward freely, or moving forward if prior questions up to clamped-1 are completed
+                if (clamped > appState.sec1Index) {
+                    const currentQId = mcData[appState.sec1Order[appState.sec1Index]].id;
+                    if (!isMCItemCompleted(currentQId)) {
+                        showToast("Hãy trả lời câu hiện tại trước khi sang câu tiếp theo!", "warning");
+                        return;
+                    }
+                }
+                appState.sec1Index = clamped;
+                saveState();
+                renderMC();
+            } else if (section === 'wf') {
+                const maxIdx = appState.sec2Order.length - 1;
+                const clamped = Math.max(0, Math.min(maxIdx, targetIdx));
+                if (clamped > appState.sec2Index) {
+                    const currentQId = wfData[appState.sec2Order[appState.sec2Index]].id;
+                    if (!isWFItemCompleted(currentQId)) {
+                        showToast("Hãy bấm 'Kiểm tra' câu hiện tại trước khi sang câu tiếp theo!", "warning");
+                        return;
+                    }
+                }
+                appState.sec2Index = clamped;
+                saveState();
+                renderWF();
+            } else if (section === 'write') {
+                const maxIdx = appState.sec3Order.length - 1;
+                const clamped = Math.max(0, Math.min(maxIdx, targetIdx));
+                if (clamped > appState.sec3Index) {
+                    const currentQId = writeData[appState.sec3Order[appState.sec3Index]].id;
+                    if (!isWriteItemCompleted(currentQId)) {
+                        showToast("Hãy sắp xếp và bấm 'Kiểm tra' câu hiện tại trước khi sang câu tiếp theo!", "warning");
+                        return;
+                    }
+                }
+                appState.sec3Index = clamped;
+                saveState();
+                renderWrite();
+            }
+        }
+
+        function buildStepStepperHTML(section, orderArr, currentIdx, checkCompletedFn, checkCorrectFn) {
+            const dots = orderArr.map((dataIdx, pos) => {
+                const item = section === 'mc' ? mcData[dataIdx] : (section === 'wf' ? wfData[dataIdx] : writeData[dataIdx]);
+                const done = checkCompletedFn(item.id);
+                const isCurrent = pos === currentIdx;
+
+                let dotClass = "bg-gray-100 text-slate border-gray-200 hover:border-gold-300";
+                if (isCurrent) {
+                    dotClass = "gold-gradient-bg text-white border-gold-500 shadow-sm scale-110";
+                } else if (done) {
+                    const ok = checkCorrectFn(item.id);
+                    dotClass = ok
+                        ? "bg-emerald-100 text-emerald-700 border-emerald-400"
+                        : "bg-rose-100 text-rose-700 border-rose-400";
+                }
+
+                return `
+                    <button onclick="jumpStepQuestion('${section}', ${pos})" title="Câu số ${pos + 1} (Đề bài #${item.id})"
+                        class="w-8 h-8 rounded-lg border text-xs font-bold flex items-center justify-center transition ${dotClass}">
+                        ${pos + 1}
+                    </button>
+                `;
+            }).join('');
+
+            return `
+                <div class="glass-card rounded-2xl p-4">
+                    <div class="flex items-center justify-between text-xs text-slate mb-2.5">
+                        <span class="font-bold text-charcoal">Tiến trình từng câu (${currentIdx + 1}/${orderArr.length})</span>
+                        <span>${appState.orderMode === 'random' ? 'Thứ tự ngẫu nhiên' : 'Thứ tự đề cương'}</span>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5">${dots}</div>
+                </div>
+            `;
+        }
+
+        function buildStepFooterNavHTML(section, currentIdx, totalCount, isCompleted, isLastStep) {
+            const prevDisabled = currentIdx === 0;
+            const nextLocked = !isCompleted;
+
+            const prevBtn = `
+                <button onclick="jumpStepQuestion('${section}', ${currentIdx - 1})" ${prevDisabled ? 'disabled' : ''}
+                    class="px-4 py-2.5 rounded-xl border text-xs sm:text-sm font-bold flex items-center space-x-2 transition ${
+                        prevDisabled
+                            ? 'border-gray-100 bg-gray-50 text-gray-300 cursor-not-allowed'
+                            : 'border-gold-300 bg-white hover:bg-gold-50 text-charcoal'
+                    }">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span>Câu trước</span>
+                </button>
+            `;
+
+            let nextBtn = '';
+            if (isLastStep) {
+                nextBtn = isCompleted
+                    ? `<button onclick="switchTab('tab-4')" class="px-5 py-2.5 rounded-xl gold-gradient-bg text-white text-xs sm:text-sm font-bold shadow-gold-glow hover:opacity-95 flex items-center space-x-2 transition">
+                           <span>Hoàn tất phần này • Xem Phân Tích</span>
+                           <i class="fa-solid fa-chart-pie"></i>
+                       </button>`
+                    : `<button disabled class="px-5 py-2.5 rounded-xl bg-gray-100 text-gray-400 border border-gray-200 text-xs sm:text-sm font-bold flex items-center space-x-2 cursor-not-allowed">
+                           <i class="fa-solid fa-lock"></i>
+                           <span>Trả lời câu cuối để hoàn tất</span>
+                       </button>`;
+            } else {
+                nextBtn = nextLocked
+                    ? `<button disabled title="Trả lời câu hiện tại để mở khóa câu tiếp theo"
+                           class="px-5 py-2.5 rounded-xl bg-gray-100 text-gray-400 border border-gray-200 text-xs sm:text-sm font-bold flex items-center space-x-2 cursor-not-allowed">
+                           <i class="fa-solid fa-lock"></i>
+                           <span>Câu tiếp theo</span>
+                       </button>`
+                    : `<button onclick="jumpStepQuestion('${section}', ${currentIdx + 1})"
+                           class="px-5 py-2.5 rounded-xl gold-gradient-bg text-white text-xs sm:text-sm font-bold shadow-gold-glow hover:scale-[1.02] flex items-center space-x-2 transition">
+                           <span>Câu tiếp theo</span>
+                           <i class="fa-solid fa-arrow-right"></i>
+                       </button>`;
+            }
+
+            return `
+                <div class="mt-6 pt-4 border-t border-gold-100 flex items-center justify-between gap-3">
+                    ${prevBtn}
+                    ${nextBtn}
+                </div>
+            `;
+        }
+
+        function renderMC() {
+            const container = document.getElementById('mc-container');
+            const letters = ['A', 'B', 'C', 'D'];
+            const order = appState.sec1Order;
+            const currentIdx = Math.max(0, Math.min(order.length - 1, appState.sec1Index));
+            appState.sec1Index = currentIdx;
+
+            const item = mcData[order[currentIdx]];
+            const chosen = appState.mcAnswers[item.id];
+            const isAnswered = chosen !== undefined;
+
+            const stepperHTML = buildStepStepperHTML(
+                'mc',
+                order,
+                currentIdx,
+                (id) => isMCItemCompleted(id),
+                (id) => appState.mcAnswers[id] === mcData.find(x => x.id === id).answer
+            );
+
+            const optionsHTML = item.options.map((opt, idx) => {
+                let btnClass = "border-gray-200 bg-white hover:border-gold-400 hover:bg-gold-50/50 text-charcoal";
+                let badgeClass = "bg-gold-50 text-gold-600 border-gold-200";
+                let statusIcon = "";
+
+                if (isAnswered) {
+                    if (idx === item.answer) {
+                        btnClass = "border-emerald-500 bg-emerald-50/90 text-emerald-900 font-semibold shadow-sm";
+                        badgeClass = "bg-emerald-600 text-white border-emerald-600";
+                        statusIcon = `<i class="fa-solid fa-circle-check text-emerald-600 ml-auto"></i>`;
+                    } else if (idx === chosen && chosen !== item.answer) {
+                        btnClass = "border-rose-400 bg-rose-50/90 text-rose-900";
+                        badgeClass = "bg-rose-600 text-white border-rose-600";
+                        statusIcon = `<i class="fa-solid fa-circle-xmark text-rose-600 ml-auto"></i>`;
+                    } else {
+                        btnClass = "border-gray-100 bg-gray-50/60 text-gray-400 opacity-75";
+                    }
+                }
+
+                return `
+                    <button onclick="selectMCOption(${item.id}, ${idx})"
+                        class="w-full text-left p-3.5 rounded-xl border transition flex items-center space-x-3 ${btnClass}">
+                        <span class="w-7 h-7 rounded-lg border flex-shrink-0 flex items-center justify-center text-xs font-bold ${badgeClass}">
+                            ${letters[idx]}
+                        </span>
+                        <span class="text-sm sm:text-base">${opt}</span>
+                        ${statusIcon}
+                    </button>
+                `;
+            }).join('');
+
+            const explainHTML = isAnswered ? `
+                <div class="mt-4 p-3.5 rounded-xl text-xs sm:text-sm flex items-start space-x-2.5 ${chosen === item.answer ? 'bg-emerald-50/70 text-emerald-800 border border-emerald-200' : 'bg-amber-50/80 text-amber-900 border border-amber-200'}">
+                    <i class="fa-solid fa-lightbulb mt-0.5 text-gold-500"></i>
+                    <div><strong>Giải thích:</strong> ${item.explain}</div>
+                </div>
+            ` : `
+                <div class="mt-4 p-3 rounded-xl bg-gold-50/60 border border-gold-200 text-xs text-gold-600 font-medium flex items-center space-x-2">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>Hãy chọn một đáp án (A, B, C hoặc D) để mở khóa nút sang câu tiếp theo.</span>
+                </div>
+            `;
+
+            const footerNav = buildStepFooterNavHTML('mc', currentIdx, order.length, isAnswered, currentIdx === order.length - 1);
+
+            container.innerHTML = `
+                <div class="space-y-4">
+                    ${stepperHTML}
+                    <div class="glass-card rounded-2xl p-5 sm:p-7">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+                            <span class="px-3 py-1 rounded-lg bg-gold-100 text-gold-600 font-serif font-bold text-sm">
+                                Câu ${currentIdx + 1}/${order.length} <span class="text-xs font-sans font-normal text-slate">(Đề #${item.id})</span>
+                            </span>
+                            <span class="text-xs font-semibold px-3 py-1 rounded-full bg-ivory border border-gold-200 text-slate">${item.topic}</span>
+                        </div>
+                        <div class="text-base sm:text-lg font-medium text-charcoal leading-relaxed mb-5">
+                            ${item.q}
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            ${optionsHTML}
+                        </div>
+                        ${explainHTML}
+                        ${footerNav}
+                    </div>
+                </div>
+            `;
+        }
+
+        function selectMCOption(qId, optionIdx) {
+            const item = mcData.find(x => x.id === qId);
+            if (!item) return;
+
+            appState.mcAnswers[qId] = optionIdx;
+            if (optionIdx === item.answer) {
+                playSound('correct');
+            } else {
+                playSound('wrong');
+            }
+            saveState();
+            renderMC();
+        }
+
+        /* --- SECTION II: WORD FORM (STRICT SINGLE QUESTION STEP) --- */
+        function toggleWordTable() {
+            playSound('click');
+            const drawer = document.getElementById('word-family-drawer');
+            const btnText = document.getElementById('btn-word-table-text');
+            drawer.classList.toggle('hidden');
+            btnText.innerText = drawer.classList.contains('hidden') ? 'Mở Bảng Từ Loại' : 'Ẩn Bảng Từ Loại';
+        }
+
+        function renderWF() {
+            const container = document.getElementById('wf-container');
+            const order = appState.sec2Order;
+            const currentIdx = Math.max(0, Math.min(order.length - 1, appState.sec2Index));
+            appState.sec2Index = currentIdx;
+
+            const item = wfData[order[currentIdx]];
+            const state = appState.wfAnswers[item.id] || { value: '', isCorrect: null };
+            const isCompleted = state.isCorrect !== null;
+
+            const stepperHTML = buildStepStepperHTML(
+                'wf',
+                order,
+                currentIdx,
+                (id) => isWFItemCompleted(id),
+                (id) => Boolean(appState.wfAnswers[id] && appState.wfAnswers[id].isCorrect === true)
+            );
+
+            let borderClass = "border-gold-200 focus:border-gold-500";
+            let statusBadge = "";
+
+            if (state.isCorrect === true) {
+                borderClass = "border-emerald-500 bg-emerald-50/40 text-emerald-900 font-semibold";
+                statusBadge = `<span class="text-xs font-bold text-emerald-600 flex items-center gap-1"><i class="fa-solid fa-check"></i> Chính xác</span>`;
+            } else if (state.isCorrect === false) {
+                borderClass = "border-rose-400 bg-rose-50/40 text-rose-900";
+                statusBadge = `<span class="text-xs font-bold text-rose-600 flex items-center gap-1"><i class="fa-solid fa-xmark"></i> Chưa đúng</span>`;
+            }
+
+            const formattedSentence = item.sentence.replace('_____', `
+                <input type="text" id="wf-input-${item.id}" value="${escapeHtml(state.value)}"
+                    onkeydown="if(event.key==='Enter') checkSingleWF(${item.id})"
+                    oninput="updateWFInput(${item.id}, this.value)"
+                    placeholder="nhập từ..."
+                    class="inline-block w-40 sm:w-48 px-3 py-1.5 mx-1 rounded-lg border-2 ${borderClass} bg-white text-center text-sm sm:text-base focus:outline-none transition" />
+            `);
+
+            const feedbackHTML = isCompleted ? `
+                <div class="mt-4 p-4 rounded-xl text-xs sm:text-sm space-y-1 ${state.isCorrect ? 'bg-emerald-50/80 border border-emerald-200 text-emerald-900' : 'bg-amber-50/80 border border-amber-200 text-amber-900'}">
+                    <div class="font-semibold">Đáp án chuẩn: <span class="text-emerald-700 underline">${item.answers.join(' / ')}</span></div>
+                    <div>${item.explain}</div>
+                </div>
+            ` : `
+                <div class="mt-4 p-3 rounded-xl bg-gold-50/60 border border-gold-200 text-xs text-gold-600 font-medium flex items-center space-x-2">
+                    <i class="fa-solid fa-lock"></i>
+                    <span>Nhập từ chia đúng dạng và bấm "Kiểm tra" để mở khóa câu tiếp theo.</span>
+                </div>
+            `;
+
+            const footerNav = buildStepFooterNavHTML('wf', currentIdx, order.length, isCompleted, currentIdx === order.length - 1);
+
+            container.innerHTML = `
+                <div class="space-y-4">
+                    ${stepperHTML}
+                    <div class="glass-card rounded-2xl p-5 sm:p-7">
+                        <div class="flex flex-wrap justify-between items-center gap-2 mb-4">
+                            <span class="px-3 py-1 rounded-lg bg-gold-100 text-gold-600 font-serif font-bold text-sm">
+                                Câu ${currentIdx + 1}/${order.length} <span class="text-xs font-sans font-normal text-slate">(Đề #${item.id})</span>
+                            </span>
+                            <div class="flex items-center space-x-2">
+                                ${statusBadge}
+                                <span class="px-3 py-1 rounded-full bg-charcoal text-gold-300 text-xs font-semibold">Gốc từ: (${item.hint})</span>
+                            </div>
+                        </div>
+                        <p class="text-base sm:text-lg text-charcoal leading-loose mb-4">
+                            ${formattedSentence}
+                        </p>
+                        <div class="flex justify-end">
+                            <button onclick="checkSingleWF(${item.id})" class="px-4 py-2 rounded-xl bg-gold-50 hover:bg-gold-100 border border-gold-300 text-gold-600 text-xs sm:text-sm font-bold transition">
+                                <i class="fa-solid fa-check mr-1.5"></i>Kiểm tra câu này
+                            </button>
+                        </div>
+                        ${feedbackHTML}
+                        ${footerNav}
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateWFInput(id, val) {
+            if (!appState.wfAnswers[id]) appState.wfAnswers[id] = { value: '', isCorrect: null };
+            appState.wfAnswers[id].value = val;
+            saveState();
+        }
+
+        function checkSingleWF(id) {
+            const item = wfData.find(x => x.id === id);
+            const inputEl = document.getElementById(`wf-input-${id}`);
+            const rawVal = inputEl ? inputEl.value : (appState.wfAnswers[id]?.value || '');
+            const cleanVal = rawVal.trim().toLowerCase();
+
+            if (!cleanVal) {
+                showToast("Vui lòng nhập từ trước khi kiểm tra!", "warning");
+                playSound('click');
+                return;
+            }
+
+            const isRight = item.answers.some(ans => ans.toLowerCase() === cleanVal);
+            appState.wfAnswers[id] = { value: rawVal.trim(), isCorrect: isRight };
+
+            playSound(isRight ? 'correct' : 'wrong');
+            saveState();
+            renderWF();
+        }
+
+        function checkAllWordForms() {
+            let checkedCount = 0;
+            let rightCount = 0;
+            wfData.forEach(item => {
+                const inputEl = document.getElementById(`wf-input-${item.id}`);
+                const rawVal = inputEl ? inputEl.value : (appState.wfAnswers[item.id]?.value || '');
+                const cleanVal = rawVal.trim().toLowerCase();
+                if (cleanVal) {
+                    checkedCount++;
+                    const isRight = item.answers.some(ans => ans.toLowerCase() === cleanVal);
+                    if (isRight) rightCount++;
+                    appState.wfAnswers[item.id] = { value: rawVal.trim(), isCorrect: isRight };
+                }
+            });
+
+            if (checkedCount === 0) {
+                showToast("Bạn chưa điền câu nào ở Phần II!", "warning");
+                playSound('click');
+                return;
+            }
+
+            playSound(rightCount > checkedCount / 2 ? 'correct' : 'wrong');
+            saveState();
+            renderWF();
+            showToast(`Đã chấm ${checkedCount} câu: Đúng ${rightCount}/${checkedCount}!`, "success");
+        }
+
+        /* --- SECTION III: WRITE (SENTENCE ARRANGEMENT - STRICT SINGLE STEP) --- */
+        function renderWrite() {
+            const container = document.getElementById('write-container');
+            const order = appState.sec3Order;
+            const currentIdx = Math.max(0, Math.min(order.length - 1, appState.sec3Index));
+            appState.sec3Index = currentIdx;
+
+            const item = writeData[order[currentIdx]];
+            const state = appState.writeAnswers[item.id];
+            const selectedIndices = state.selectedIndices || [];
+            const poolOrder = state.poolOrder || [...Array(item.chunks.length).keys()];
+            const isCompleted = state.isCorrect !== null;
+
+            const stepperHTML = buildStepStepperHTML(
+                'write',
+                order,
+                currentIdx,
+                (id) => isWriteItemCompleted(id),
+                (id) => Boolean(appState.writeAnswers[id] && appState.writeAnswers[id].isCorrect === true)
+            );
+
+            const selectedHTML = selectedIndices.length > 0
+                ? selectedIndices.map((chunkIdx, pos) => `
+                    <button onclick="removeWriteChip(${item.id}, ${pos})"
+                        class="word-chip px-3.5 py-2 rounded-xl bg-charcoal text-white font-medium text-sm shadow-sm hover:bg-gold-600 flex items-center space-x-1.5">
+                        <span>${escapeHtml(item.chunks[chunkIdx])}</span>
+                        <i class="fa-solid fa-xmark text-[10px] text-gold-300 opacity-75"></i>
+                    </button>
+                `).join('')
+                : `<span class="text-xs text-gray-400 italic py-2">Bấm vào các mảnh từ bên dưới để ghép thành câu hoàn chỉnh tại đây...</span>`;
+
+            const poolHTML = poolOrder.map(chunkIdx => {
+                const isUsed = selectedIndices.includes(chunkIdx);
+                if (isUsed) {
+                    return `<span class="px-3.5 py-2 rounded-xl border border-dashed border-gray-200 bg-gray-50 text-gray-300 text-sm select-none">${escapeHtml(item.chunks[chunkIdx])}</span>`;
+                }
+                return `
+                    <button onclick="addWriteChip(${item.id}, ${chunkIdx})"
+                        class="word-chip px-3.5 py-2 rounded-xl bg-white border border-gold-300 hover:border-gold-500 hover:bg-gold-50 text-charcoal font-medium text-sm shadow-sm">
+                        ${escapeHtml(item.chunks[chunkIdx])}
+                    </button>
+                `;
+            }).join('');
+
+            let resultBanner = '';
+            if (state.isCorrect === true) {
+                resultBanner = `
+                    <div class="mt-4 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs sm:text-sm space-y-1">
+                        <div class="font-bold flex items-center gap-1.5 text-emerald-700"><i class="fa-solid fa-circle-check"></i> Xuất sắc! Câu sắp xếp hoàn toàn chính xác.</div>
+                        <div class="text-emerald-800">${item.explain}</div>
+                    </div>
+                `;
+            } else if (state.isCorrect === false) {
+                resultBanner = `
+                    <div class="mt-4 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-xs sm:text-sm space-y-1.5">
+                        <div class="font-bold flex items-center gap-1.5 text-rose-700"><i class="fa-solid fa-circle-xmark"></i> Thứ tự từ chưa chính xác.</div>
+                        <div><strong>Đáp án chuẩn:</strong> <span class="text-emerald-700 font-semibold">${escapeHtml(item.target)}</span></div>
+                        <div class="text-slate">${item.explain}</div>
+                    </div>
+                `;
+            } else {
+                resultBanner = `
+                    <div class="mt-4 p-3 rounded-xl bg-gold-50/60 border border-gold-200 text-xs text-gold-600 font-medium flex items-center space-x-2">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>Ghép đủ các mảnh từ và bấm "Kiểm tra" để mở khóa câu tiếp theo.</span>
+                    </div>
+                `;
+            }
+
+            const footerNav = buildStepFooterNavHTML('write', currentIdx, order.length, isCompleted, currentIdx === order.length - 1);
+
+            container.innerHTML = `
+                <div class="space-y-4">
+                    ${stepperHTML}
+                    <div class="glass-card rounded-2xl p-5 sm:p-7">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <div class="flex items-center space-x-2">
+                                <span class="px-3 py-1 rounded-lg bg-gold-100 text-gold-600 font-serif font-bold text-sm">
+                                    Câu ${currentIdx + 1}/${order.length} <span class="text-xs font-sans font-normal text-slate">(Đề #${item.id})</span>
+                                </span>
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-gold-50 text-gold-600 border border-gold-200">${item.type}</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button onclick="reshuffleWrite(${item.id})" title="Xáo trộn & làm lại câu này"
+                                    class="px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 text-slate text-xs font-medium flex items-center gap-1.5 transition">
+                                    <i class="fa-solid fa-shuffle"></i>
+                                    <span>Xáo trộn lại</span>
+                                </button>
+                                <button onclick="checkWriteSentence(${item.id})"
+                                    class="px-4 py-1.5 rounded-lg gold-gradient-bg text-white text-xs font-bold shadow-sm hover:opacity-95 flex items-center gap-1.5 transition">
+                                    <i class="fa-solid fa-check"></i>
+                                    <span>Kiểm tra</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl bg-ivory border border-gold-200/80 text-sm sm:text-base font-medium text-charcoal mb-4">
+                            <span class="text-gold-600 font-bold mr-1">Đề bài:</span> ${escapeHtml(item.prompt)}
+                        </div>
+
+                        <div class="min-h-[56px] p-3 rounded-xl bg-gold-50/40 border-2 border-dashed border-gold-300 flex flex-wrap gap-2 items-center mb-4">
+                            ${selectedHTML}
+                        </div>
+
+                        <div class="flex flex-wrap gap-2">
+                            ${poolHTML}
+                        </div>
+
+                        ${resultBanner}
+                        ${footerNav}
+                    </div>
+                </div>
+            `;
+        }
+
+        const mcData = [
+            { id: 1, topic: "Từ vựng dân tộc", q: "Nam: Do you know which ethnic group has the largest population in Viet Nam?<br>Phong: Yes, it is the _____.", options: ["Kinh", "Tay", "Hmong", "Khmer"], answer: 0, explain: "Người Kinh chiếm khoảng 85–86% dân số Việt Nam, là dân tộc đông nhất." },
+            { id: 2, topic: "Từ vựng dân tộc", q: "Tuấn: Where do many minority groups in the northern mountains live?<br>Lan: They live in the _____.", options: ["villages", "cities", "apartments", "households"], answer: 0, explain: "Nhiều dân tộc thiểu số ở vùng núi phía bắc sinh sống tại các bản làng (villages)." },
+            { id: 3, topic: "Từ vựng nhà sàn", q: "Mai: They usually build wooden _____ to stay safe from wild animals and floods.<br>Minh: That right, they are called _____.", options: ["stilt houses", "terraced fields", "commmunal houses", "muddy paths"], answer: 0, explain: "Nhà sàn (stilt houses) làm bằng gỗ giúp tránh thú dữ và ngập lụt." },
+            { id: 4, topic: "Từ vựng cảnh quan", q: "Lan: Look! Those fields on the mountainside look like giant green stairs.<br>Nam: Yes, they are called _____.", options: ["sandy", "terraced", "rocky", "muddy"], answer: 1, explain: "Ruộng bậc thang (terraced fields) trông như những bậc thang xanh khổng lồ trên sườn núi." },
+            { id: 5, topic: "Từ vựng trang phục", q: "Mary: Why are the traditional garments of ethnic groups so colourful?<br>Bình: Because they weave the cloth by hand and use natural _____.", options: ["dyes", "metals", "stones", "plastics"], answer: 0, explain: "Dùng thuốc nhuộm tự nhiên (natural dyes) tạo nên màu sắc đặc trưng cho trang phục truyền thống." },
+            { id: 6, topic: "Văn hóa Cồng Chiêng", q: "Mark: Have you ever watched a traditional gong performance?<br>Hoa: Yes, The _____ Space of Gong is recognised by UNESCO in the Central Highlands.", options: ["Festival", "Culture", "Heritage", "Fashion"], answer: 2, explain: "Không gian văn hóa Cồng chiêng Tây Nguyên (Space of Gong Culture / Heritage) được UNESCO công nhận." },
+            { id: 7, topic: "Từ vựng chăn nuôi", q: "Đạt: What do ethnic minority people usually raise on their farms?<br>Hùng: They keep _____ such as buffaloes, cows, and poultry.", options: ["livestock", "crops", "pets", "insects"], answer: 0, explain: "Trâu, bò, gia cầm thuộc nhóm gia súc/vật nuôi trang trại (livestock)." },
+            { id: 8, topic: "Động từ + V-ing", q: "Hiếu: Look! The villagers _____ traditional folk dances in the communal yard.<br>Quỳnh: Wow. Those dances are absolutely stunning!", options: ["perform", "performed", "are performing", "have performed"], answer: 2, explain: "Có từ 'Look!' và ngữ cảnh đang diễn ra -> thì hiện tại tiếp diễn (are performing)." },
+            { id: 9, topic: "Động từ + V-ing", q: "Thắng: Does ethnic minority children mind _____ long distances to reach their school?<br>Kim: No, they are used to walking up and down the steep hills.", options: ["walk", "to walk", "walking", "walked"], answer: 2, explain: "Sau động từ 'mind' luôn dùng danh động từ V-ing (walking)." },
+            { id: 10, topic: "Động từ + to-V", q: "Lam: What do local authorities plan _____ in the commune?<br>Hưng: That will help villagers showcase their traditional crafts to tourists.", options: ["build", "building", "to build", "built"], answer: 2, explain: "Cấu trúc 'plan + to V' (dự định làm gì) -> to build." },
+            { id: 11, topic: "Động từ + to-V", q: "Tân: Tourists should avoid _____ loud noises when visiting sacred places in the village.<br>Trâm: Everyone in the village is looking forward to it.", options: ["make", "making", "to make", "made"], answer: 1, explain: "Sau 'avoid' luôn là V-ing (avoid making noise = tránh gây ồn)." },
+            { id: 12, topic: "Động từ + to-V", q: "Anh: The village chief decided _____ an annual festival to celebrate the new harvest.<br>Vy: There are several ethnic groups such as the Ede, Bahnar, and Jarai.", options: ["organise", "organising", "to organise", "organised"], answer: 2, explain: "Cấu trúc 'decide + to V' (quyết định làm gì) -> to organise." },
+            { id: 13, topic: "Lượng từ (Quantifiers)", q: "Vinh: How _____ sticky rice did your mother prepare for the festival?<br>Duyên: She cooked five large baskets of five-colour sticky rice.", options: ["many", "much", "a few", "a little"], answer: 1, explain: "'Sticky rice' (xôi) là danh từ không đếm được -> dùng 'How much'." },
+            { id: 14, topic: "Lượng từ (Quantifiers)", q: "Khang: Are there _____ ethnic groups in the Central Highlands of Viet Nam?<br>Dũng: Yes, please. Just a little, thank you.", options: ["some", "any", "much", "a little"], answer: 1, explain: "Trong câu nghi vấn thông thường với danh từ đếm được số nhiều -> dùng 'any'." },
+            { id: 15, topic: "Lượng từ (Quantifiers)", q: "Thảo: Would you like _____ fresh milk from the local dairy farm?<br>Khoa: No, but the government is building new schools and roads here.", options: ["some", "many", "a few", "an"], answer: 0, explain: "Trong câu mời/đề nghị lịch sự (Would you like...?) -> dùng 'some'." },
+            { id: 16, topic: "Lượng từ (Quantifiers)", q: "Mai: Are there _____ modern facilities in this remote mountain village?<br>Cường: Yes. Their hospitality is truly remarkable.", options: ["a some", "any", "much", "a little"], answer: 1, explain: "Câu hỏi với danh từ số nhiều 'modern facilities' -> dùng 'any'." },
+            { id: 17, topic: "Liên từ (Conjunctions)", q: "Duy: Life in the high mountains is tough, _____ local people always smile warmly.<br>Lan: That's why those fields produce bountiful harvests every year.", options: ["because", "so", "but", "therefore"], answer: 2, explain: "Hai vế mang ý tương phản (khó khăn nhưng vẫn cười tươi) -> dùng 'but'." },
+            { id: 18, topic: "Liên từ (Conjunctions)", q: "Khoa: That's why terraced fields are steep, ethnic farmers cultivate them with great skill.<br>Thảo: It's good that everyone arrived safely.", options: ["Because", "However", "Although", "Therefore"], answer: 2, explain: "Mặc dù ruộng bậc thang dốc nhưng nông dân vẫn canh tác khéo léo -> dùng 'Although'." },
+            { id: 19, topic: "Liên từ (Conjunctions)", q: "Linh: The road to the village was slippery after the rain, _____ we walked very carefully.<br>Tom: What materials are used to build stilt houses?", options: ["but", "so", "although", "because"], answer: 1, explain: "Đường trơn là nguyên nhân, đi rất cẩn thận là kết quả -> dùng 'so' (nên)." },
+            { id: 20, topic: "Giới từ (Prepositions)", q: "Lai: Stilt houses are made _____ natural materials like wood, bamboo, and leaves.<br>John: Can you tell me something _____ your culture?", options: ["in", "of", "from", "into"], answer: 2, explain: "Cấu trúc 'be made from' (được làm từ nguyên liệu thô/tự nhiên) -> from." },
+            { id: 21, topic: "Giới từ & Giao tiếp", q: "Mai: In my culture, people often celebrate traditional festivals with music, dancing, and delicious food.<br>Tùng: Would you like to join us for the gong dance tonight?<br>Tuyền: _____ I've always wanted to see it in person.", options: ["to", "about", "with", "for"], answer: 1, explain: "Cụm 'tell sb about sth' (kể cho ai nghe về điều gì) -> about." },
+            { id: 22, topic: "Hội thoại (Speaking)", q: "Tùng: Would you like to join us for the gong dance tonight?<br>Tuyền: _____ I've always wanted to see it in person.", options: ["No, I don't", "Yes, I do", "Not at all", "I'd love to"], answer: 3, explain: "Đáp lại lời mời 'Would you like to...?' một cách tự nhiên nhất là 'I'd love to'." }
+        ];
+
+        const wfData = [
+            { id: 1, sentence: "The Hmong people have many colourful _____ traditional clothes.", hint: "interest", answers: ["interesting"], explain: "Trước cụm danh từ 'traditional clothes' cần một tính từ chỉ tính chất vật -> interesting." },
+            { id: 2, sentence: "The local radio _____ the traditional songs of ethnic groups.", hint: "popular", answers: ["popularises", "popularizes"], explain: "Chủ ngữ số ít 'The local radio' thiếu động từ chia thì hiện tại đơn -> popularises / popularizes." },
+            { id: 3, sentence: "This traditional dance is _____ performed at local festivals.", hint: "popularity", answers: ["popularly"], explain: "Bổ nghĩa cho phân từ 'performed' cần một trạng từ -> popularly." },
+            { id: 4, sentence: "Vietnam has many different ethnic _____.", hint: "cultural", answers: ["cultures"], explain: "Sau 'many different ethnic' cần một danh từ đếm được số nhiều -> cultures." },
+            { id: 5, sentence: "The Thai people have many _____ activities during festivals.", hint: "culture", answers: ["cultural"], explain: "Trước danh từ 'activities' cần một tính từ -> cultural (thuộc về văn hóa)." },
+            { id: 6, sentence: "Many tourists are _____ in the traditional clothes of the Dao people.", hint: "interest", answers: ["interested"], explain: "Cấu trúc 'be interested in' (cảm thấy thích thú/quan tâm tới điều gì - dùng cho người)." },
+            { id: 7, sentence: "The ethnic groups understand the _____ of protecting their traditions.", hint: "important", answers: ["importance"], explain: "Sau mạo từ 'the' và trước 'of' cần một danh từ -> importance (tầm quan trọng)." },
+            { id: 8, sentence: "Traditional festivals are _____ to ethnic communities.", hint: "importance", answers: ["important"], explain: "Sau động từ to-be 'are' cần một tính từ -> important." },
+            { id: 9, sentence: "The _____ play traditional instruments at the festival.", hint: "music", answers: ["musicians"], explain: "Động từ 'play' chia số nhiều -> chủ ngữ chỉ người số nhiều: musicians (các nhạc công)." },
+            { id: 10, sentence: "The young artists express their culture _____ through traditional songs.", hint: "musician", answers: ["musically"], explain: "Bổ nghĩa cho động từ 'express' cần một trạng từ -> musically." },
+            { id: 11, sentence: "The Thai woman always _____ her traditional house with colourful patterns before the festival.", hint: "decoration", answers: ["decorates"], explain: "Chủ ngữ số ít 'The Thai woman' + 'always' -> động từ chia hiện tại đơn: decorates." },
+            { id: 12, sentence: "The Thai people use _____ patterns on their traditional clothes.", hint: "decorate", answers: ["decorative"], explain: "Trước danh từ 'patterns' cần một tính từ -> decorative (có tính trang trí)." },
+            { id: 13, sentence: "Many ethnic groups live close to _____ in the mountains.", hint: "natural", answers: ["nature"], explain: "Sau giới từ 'to' cần một danh từ -> nature (thiên nhiên)." },
+            { id: 14, sentence: "Some ethnic groups avoid using _____ bright colours in their traditional clothes.", hint: "nature", answers: ["naturally"], explain: "Bổ nghĩa cho tính từ 'bright' cần một trạng từ -> naturally (sáng màu một cách tự nhiên)." },
+            { id: 15, sentence: "Traditional festivals help _____ relationships among ethnic groups.", hint: "strong", answers: ["strengthen"], explain: "Sau động từ 'help' cần một động từ nguyên mẫu -> strengthen (củng cố/tăng cường)." },
+            { id: 16, sentence: "Ethnic communities _____ believe in preserving their traditional values.", hint: "strength", answers: ["strongly"], explain: "Bổ nghĩa cho động từ 'believe' cần một trạng từ -> strongly (mạnh mẽ/sâu sắc)." }
+        ];
+
+        const writeData = [
+            {
+                id: 1,
+                type: "Cấu trúc It is + adj + to V",
+                prompt: "Learning about ethnic groups in Viet Nam is interesting.",
+                chunks: ["It", "is", "interesting", "to learn", "about", "ethnic groups", "in Viet Nam."],
+                target: "It is interesting to learn about ethnic groups in Viet Nam.",
+                explain: "Chuyển V-ing làm chủ ngữ sang chủ ngữ giả: It + is + tính từ + to V."
+            },
+            {
+                id: 2,
+                type: "Cấu trúc It is + adj + to V",
+                prompt: "Visiting traditional villages is fascinating.",
+                chunks: ["It", "is", "fascinating", "to visit", "traditional", "villages."],
+                target: "It is fascinating to visit traditional villages.",
+                explain: "Cấu trúc: It is fascinating + to visit + traditional villages."
+            },
+            {
+                id: 3,
+                type: "Cấu trúc It is + adj + to V",
+                prompt: "To understand different cultures is important.",
+                chunks: ["It", "is", "important", "to understand", "different", "cultures."],
+                target: "It is important to understand different cultures.",
+                explain: "Đưa chủ ngữ giả 'It' lên đầu câu: It is important to understand different cultures."
+            },
+            {
+                id: 4,
+                type: "Đặt câu hỏi Yes / No",
+                prompt: "Many ethnic groups in Viet Nam are famous for their traditional festivals. (Yes / No question)",
+                chunks: ["Are", "many", "ethnic groups", "in Viet Nam", "famous for", "their", "traditional festivals?"],
+                target: "Are many ethnic groups in Viet Nam famous for their traditional festivals?",
+                explain: "Đảo động từ to-be 'Are' lên trước chủ ngữ 'many ethnic groups in Viet Nam'."
+            },
+            {
+                id: 5,
+                type: "Đặt câu hỏi Yes / No",
+                prompt: "The Cham people celebrate the Kate Festival every year. (Yes / No question)",
+                chunks: ["Do", "the Cham people", "celebrate", "the Kate Festival", "every year?"],
+                target: "Do the Cham people celebrate the Kate Festival every year?",
+                explain: "Thì hiện tại đơn với chủ ngữ số nhiều 'The Cham people' -> mượn trợ động từ 'Do' ở đầu câu."
+            },
+            {
+                id: 6,
+                type: "Đặt câu hỏi Yes / No",
+                prompt: "The ethnic children performed traditional dances at the festival yesterday. (Yes / No question)",
+                chunks: ["Did", "the ethnic children", "perform", "traditional dances", "at the festival", "yesterday?"],
+                target: "Did the ethnic children perform traditional dances at the festival yesterday?",
+                explain: "Thì quá khứ đơn ('performed ... yesterday') -> mượn trợ động từ 'Did' và đưa động từ về nguyên mẫu 'perform'."
+            },
+            {
+                id: 7,
+                type: "Đặt câu hỏi Yes / No",
+                prompt: "Visitors can learn about ethnic traditions through local festivals. (Yes / No question)",
+                chunks: ["Can", "visitors", "learn about", "ethnic traditions", "through", "local festivals?"],
+                target: "Can visitors learn about ethnic traditions through local festivals?",
+                explain: "Đảo động từ khuyết thiếu 'Can' lên trước chủ ngữ 'visitors'."
+            },
+            {
+                id: 8,
+                type: "Đặt câu hỏi Wh-question",
+                prompt: "There are 54 ethnic groups in Viet Nam. (Wh_question)",
+                chunks: ["How many", "ethnic groups", "are there", "in Viet Nam?"],
+                target: "How many ethnic groups are there in Viet Nam?",
+                explain: "Hỏi số lượng danh từ đếm được -> How many + ethnic groups + are there + in Viet Nam?"
+            },
+            {
+                id: 9,
+                type: "Đặt câu hỏi Wh-question",
+                prompt: "I once saw a bamboo house on high posts in a travel brochure. (Wh_question)",
+                chunks: ["Where", "did", "you", "once see", "a bamboo house", "on high posts?"],
+                target: "Where did you once see a bamboo house on high posts?",
+                explain: "Hỏi địa điểm ('in a travel brochure') ở quá khứ đơn -> Where + did + you + once see...?"
+            },
+            {
+                id: 10,
+                type: "Đặt câu hỏi Wh-question",
+                prompt: "The visitors can get to the Cat Cat village by motorbikes. (Wh_question)",
+                chunks: ["How", "can", "the visitors", "get to", "the Cat Cat village?"],
+                target: "How can the visitors get to the Cat Cat village?",
+                explain: "Hỏi phương tiện đi lại ('by motorbikes') -> How + can + the visitors + get to...?"
+            }
+        ];
+
+        /* =========================================================================
+           2. APPLICATION STATE & STEP-BY-STEP ORDER MANAGEMENT
+           ========================================================================= */
+        const STORAGE_KEY = 'review_unit_4_luxury_state_v2';
+
+        let appState = {
+            username: '',
+            orderMode: 'sequential', // 'sequential' | 'random'
+            sec1Order: [],
+            sec2Order: [],
+            sec3Order: [],
+            sec1Index: 0,
+            sec2Index: 0,
+            sec3Index: 0,
+            mcAnswers: {},        // { qId: selectedIndex }
+            wfAnswers: {},        // { qId: { value: string, isCorrect: boolean|null } }
+            writeAnswers: {},     // { qId: { selectedIndices: [], poolOrder: [], isCorrect: boolean|null } }
+            localForumMsgs: [],   // Fallback if offline
+            settings: {
+                quality: 'high',  // 'high' | 'medium' | 'low'
+                volume: 0.7,
+                muted: false
+            }
+        };
+
+        function generateOrderArray(length, mode) {
+            const arr = [...Array(length).keys()];
+            return mode === 'random' ? shuffleArray(arr) : arr;
+        }
+
+        function loadState() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    appState = {
+                        ...appState,
+                        ...parsed,
+                        settings: { ...appState.settings, ...(parsed.settings || {}) }
+                    };
+                }
+            } catch (e) {
+                console.warn("Could not load state from localStorage", e);
+            }
+
+            if (!appState.sec1Order || appState.sec1Order.length !== mcData.length) {
+                appState.sec1Order = generateOrderArray(mcData.length, appState.orderMode);
+            }
+            if (!appState.sec2Order || appState.sec2Order.length !== wfData.length) {
+                appState.sec2Order = generateOrderArray(wfData.length, appState.orderMode);
+            }
+            if (!appState.sec3Order || appState.sec3Order.length !== writeData.length) {
+                appState.sec3Order = generateOrderArray(writeData.length, appState.orderMode);
+            }
+
+            // Ensure write poolOrder is initialized
+            writeData.forEach(item => {
+                if (!appState.writeAnswers[item.id]) {
+                    appState.writeAnswers[item.id] = {
+                        selectedIndices: [],
+                        poolOrder: shuffleArray([...Array(item.chunks.length).keys()]),
+                        isCorrect: null
+                    };
+                }
+            });
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+            } catch (e) {
+                console.warn("Could not save state", e);
+            }
+            updateAllCounters();
+        }
+
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function setOrderMode(mode) {
+            playSound('click');
+            appState.orderMode = mode;
+            appState.sec1Order = generateOrderArray(mcData.length, mode);
+            appState.sec2Order = generateOrderArray(wfData.length, mode);
+            appState.sec3Order = generateOrderArray(writeData.length, mode);
+            appState.sec1Index = 0;
+            appState.sec2Index = 0;
+            appState.sec3Index = 0;
+
+            updateOrderButtonsUI();
+            saveState();
+            renderMC();
+            renderWF();
+            renderWrite();
+
+            showToast(mode === 'random' ? "Đã chuyển sang thứ tự Ngẫu nhiên!" : "Đã chuyển về Đúng thứ tự đề cương!", "info");
+        }
+
+        function updateOrderButtonsUI() {
+            const isSeq = appState.orderMode === 'sequential';
+            document.querySelectorAll('.order-mode-btn-seq').forEach(btn => {
+                btn.className = isSeq
+                    ? 'order-mode-btn-seq px-3.5 py-2 rounded-lg text-xs font-bold flex items-center justify-center space-x-1.5 transition bg-charcoal text-white shadow-sm'
+                    : 'order-mode-btn-seq px-3.5 py-2 rounded-lg text-xs font-bold flex items-center justify-center space-x-1.5 transition text-slate hover:bg-gold-50';
+            });
+            document.querySelectorAll('.order-mode-btn-rnd').forEach(btn => {
+                btn.className = !isSeq
+                    ? 'order-mode-btn-rnd px-3.5 py-2 rounded-lg text-xs font-bold flex items-center justify-center space-x-1.5 transition gold-gradient-bg text-white shadow-sm'
+                    : 'order-mode-btn-rnd px-3.5 py-2 rounded-lg text-xs font-bold flex items-center justify-center space-x-1.5 transition text-slate hover:bg-gold-50';
+            });
+        }
+
+        /* =========================================================================
+           2B. WELCOME MODAL & REAL-TIME FORUM LOGIC
+           ========================================================================= */
+        function updateUsernameUI() {
+            const name = appState.username || 'Học sinh';
+            document.getElementById('header-username-display').innerText = name;
+            document.getElementById('forum-my-name').innerText = name;
+            document.getElementById('forum-avatar-letter').innerText = name.charAt(0).toUpperCase();
+        }
+
+        function openWelcomeModalForEdit() {
+            playSound('click');
+            document.getElementById('welcome-name-input').value = appState.username || '';
+            document.getElementById('welcome-modal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('welcome-name-input').focus(), 100);
+        }
+
+        async function submitWelcomeName() {
+            const input = document.getElementById('welcome-name-input');
+            const name = input.value.trim();
+            if (!name) {
+                showToast("Vui lòng nhập tên hiển thị của bạn!", "warning");
+                input.focus();
+                return;
+            }
+            const isFirstJoin = !appState.username;
+            appState.username = name;
+            saveState();
+            updateUsernameUI();
+            document.getElementById('welcome-modal').classList.add('hidden');
+            playSound('correct');
+
+            if (isFirstJoin) {
+                const sysPayload = { type: 'system', sender: name, text: `${name} đã tham gia phòng ôn tập Unit 4.` };
+                if (window.postToSocketForum) {
+                    await window.postToSocketForum(sysPayload);
+                }
+            } else if (socketClient && socketConnected) {
+                socketClient.emit('forum_join', { username: name });
+            }
+            showToast(`Chào mừng ${name} đến với Review of Unit 4!`, "success");
+        }
+
+        function insertForumTemplate(text) {
+            playSound('click');
+            const input = document.getElementById('forum-input');
+            input.value = text;
+            input.focus();
+        }
+
+        async function sendForumMessage(e) {
+            e.preventDefault();
+            const input = document.getElementById('forum-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const sender = appState.username || 'Học sinh';
+            input.value = '';
+            playSound('click');
+
+            const timeStr = new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+            const payload = {
+                type: 'chat',
+                sender: sender,
+                text: text,
+                timeStr: timeStr
+            };
+
+            let sentRealtime = false;
+            if (window.postToSocketForum) {
+                sentRealtime = await window.postToSocketForum(payload);
+            }
+
+            if (!sentRealtime) {
+                appState.localForumMsgs.push({ ...payload, createdAtMs: Date.now() });
+                saveState();
+                window.renderForumMessages(appState.localForumMsgs);
+            }
+        }
+
+        window.renderForumMessages = function(messages) {
+            const box = document.getElementById('forum-messages-box');
+            const countBadge = document.getElementById('forum-msg-count');
+            if (!box) return;
+
+            countBadge.innerText = `${messages.length} tin nhắn`;
+
+            if (messages.length === 0) {
+                box.innerHTML = `<div class="text-center text-xs text-slate py-12">Chưa có tin nhắn nào. Hãy là người đầu tiên đặt câu hỏi thảo luận!</div>`;
+                return;
+            }
+
+            const myName = appState.username || '';
+            box.innerHTML = messages.map(m => {
+                if (m.type === 'system') {
+                    return `
+                        <div class="text-center my-2">
+                            <span class="inline-block px-3 py-1 rounded-full bg-gold-100/80 text-gold-600 text-[11px] font-medium">
+                                <i class="fa-solid fa-sparkles mr-1"></i>${escapeHtml(m.text)}
+                            </span>
+                        </div>
+                    `;
+                }
+
+                const isMe = m.sender === myName;
+                const time = m.timeStr || (m.createdAtMs ? new Date(m.createdAtMs).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }) : '');
+
+                return `
+                    <div class="flex flex-col ${isMe ? 'items-end' : 'items-start'}">
+                        <div class="flex items-center space-x-1.5 mb-1 px-1">
+                            <span class="text-[11px] font-bold ${isMe ? 'text-gold-600' : 'text-charcoal'}">${isMe ? 'Bạn (' + escapeHtml(m.sender) + ')' : escapeHtml(m.sender)}</span>
+                            <span class="text-[10px] text-gray-400">• ${time}</span>
+                        </div>
+                        <div class="px-4 py-2.5 rounded-2xl max-w-[82%] text-sm leading-relaxed shadow-sm ${
+                            isMe
+                                ? 'bg-charcoal text-white rounded-tr-sm border border-gold-400/40'
+                                : 'bg-white text-charcoal border border-gold-200 rounded-tl-sm'
+                        }">
+                            ${escapeHtml(m.text)}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            box.scrollTop = box.scrollHeight;
+        };
+
+        window.renderForumMessages = window.renderForumMessages || function() {};
+
+        /* =========================================================================
+           3. WEB AUDIO API SOUND ENGINE (CRYSTAL CHIMES, SOFT THUD, FANFARE)
+           ========================================================================= */
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (AudioContextClass) {
+                    audioCtx = new AudioContextClass();
+                }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function playSound(type) {
+            if (appState.settings.muted || appState.settings.volume <= 0) return;
+            try {
+                initAudio();
+                if (!audioCtx) return;
+
+                const now = audioCtx.currentTime;
+                const vol = appState.settings.volume * 0.25;
+
+                if (type === 'click') {
+                    // Crystal tap sound
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(880, now);
+                    osc.frequency.exponentialRampToValueAtTime(1320, now + 0.06);
+                    gain.gain.setValueAtTime(vol * 0.6, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.07);
+                } else if (type === 'correct') {
+                    // Golden major triad chime (C5 - E5 - G5)
+                    [523.25, 659.25, 783.99].forEach((freq, idx) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + idx * 0.06);
+                        gain.gain.setValueAtTime(0.001, now + idx * 0.06);
+                        gain.gain.linearRampToValueAtTime(vol, now + idx * 0.06 + 0.02);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.06 + 0.45);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now + idx * 0.06);
+                        osc.stop(now + idx * 0.06 + 0.46);
+                    });
+                } else if (type === 'wrong') {
+                    // Soft warm low double-thud
+                    [220, 185].forEach((freq, idx) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now + idx * 0.11);
+                        gain.gain.setValueAtTime(vol * 0.9, now + idx * 0.11);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.11 + 0.22);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now + idx * 0.11);
+                        osc.stop(now + idx * 0.11 + 0.23);
+                    });
+                } else if (type === 'fanfare') {
+                    // Royal arpeggio fanfare
+                    [523.25, 659.25, 783.99, 1046.50].forEach((freq, idx) => {
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+                        gain.gain.setValueAtTime(vol * 0.9, now + idx * 0.08);
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.65);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now + idx * 0.08);
+                        osc.stop(now + idx * 0.08 + 0.66);
+                    });
+                }
+            } catch (e) {
+                // Ignore audio errors
+            }
+        }
+
+        function toggleMute() {
+            appState.settings.muted = !appState.settings.muted;
+            updateSoundUI();
+            saveState();
+            if (!appState.settings.muted) playSound('click');
+        }
+
+        function updateVolume(val) {
+            appState.settings.volume = val / 100;
+            if (appState.settings.volume > 0 && appState.settings.muted) {
+                appState.settings.muted = false;
+            }
+            document.getElementById('volume-label').innerText = `${val}%`;
+            updateSoundUI();
+            saveState();
+        }
+
+        function updateSoundUI() {
+            const icon = document.getElementById('sound-icon');
+            const slider = document.getElementById('volume-slider');
+            if (slider) slider.value = Math.round(appState.settings.volume * 100);
+            document.getElementById('volume-label').innerText = `${Math.round(appState.settings.volume * 100)}%`;
+
+            if (appState.settings.muted || appState.settings.volume === 0) {
+                icon.className = 'fa-solid fa-volume-xmark text-gray-400';
+            } else {
+                icon.className = 'fa-solid fa-volume-high text-gold-600';
+            }
+        }
+
+        /* =========================================================================
+           4. RENDERING SECTIONS I, II, III
+           ========================================================================= */
+        function renderMC() {
+            const container = document.getElementById('mc-container');
+            const letters = ['A', 'B', 'C', 'D'];
+
+            container.innerHTML = mcData.map(item => {
+                const chosen = appState.mcAnswers[item.id];
+                const isAnswered = chosen !== undefined;
+
+                const optionsHTML = item.options.map((opt, idx) => {
+                    let btnClass = "border-gray-200 bg-white hover:border-gold-400 hover:bg-gold-50/50 text-charcoal";
+                    let badgeClass = "bg-gold-50 text-gold-600 border-gold-200";
+                    let statusIcon = "";
+
+                    if (isAnswered) {
+                        if (idx === item.answer) {
+                            btnClass = "border-emerald-500 bg-emerald-50/90 text-emerald-900 font-semibold shadow-sm";
+                            badgeClass = "bg-emerald-600 text-white border-emerald-600";
+                            statusIcon = `<i class="fa-solid fa-circle-check text-emerald-600 ml-auto"></i>`;
+                        } else if (idx === chosen && chosen !== item.answer) {
+                            btnClass = "border-rose-400 bg-rose-50/90 text-rose-900";
+                            badgeClass = "bg-rose-600 text-white border-rose-600";
+                            statusIcon = `<i class="fa-solid fa-circle-xmark text-rose-600 ml-auto"></i>`;
+                        } else {
+                            btnClass = "border-gray-100 bg-gray-50/60 text-gray-400 opacity-75";
+                        }
+                    }
+
+                    return `
+                        <button onclick="selectMCOption(${item.id}, ${idx})"
+                            class="w-full text-left p-3.5 rounded-xl border transition flex items-center space-x-3 ${btnClass}">
+                            <span class="w-7 h-7 rounded-lg border flex-shrink-0 flex items-center justify-center text-xs font-bold ${badgeClass}">
+                                ${letters[idx]}
+                            </span>
+                            <span class="text-sm sm:text-base">${opt}</span>
+                            ${statusIcon}
+                        </button>
+                    `;
+                }).join('');
+
+                const explainHTML = isAnswered ? `
+                    <div class="mt-4 p-3.5 rounded-xl text-xs sm:text-sm flex items-start space-x-2.5 ${chosen === item.answer ? 'bg-emerald-50/70 text-emerald-800 border border-emerald-200' : 'bg-amber-50/80 text-amber-900 border border-amber-200'}">
+                        <i class="fa-solid fa-lightbulb mt-0.5 text-gold-500"></i>
+                        <div><strong>Giải thích:</strong> ${item.explain}</div>
+                    </div>
+                ` : '';
+
+                return `
+                    <div class="glass-card rounded-2xl p-5 sm:p-6">
+                        <div class="flex items-start space-x-3 mb-4">
+                            <span class="px-2.5 py-1 rounded-lg bg-gold-100 text-gold-600 font-serif font-bold text-sm flex-shrink-0">
+                                Câu ${item.id}
+                            </span>
+                            <div class="text-sm sm:text-base font-medium text-charcoal leading-relaxed">
+                                ${item.q}
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            ${optionsHTML}
+                        </div>
+                        ${explainHTML}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function selectMCOption(qId, optionIdx) {
+            const item = mcData.find(x => x.id === qId);
+            if (!item) return;
+
+            appState.mcAnswers[qId] = optionIdx;
+            if (optionIdx === item.answer) {
+                playSound('correct');
+            } else {
+                playSound('wrong');
+            }
+            saveState();
+            renderMC();
+        }
+
+        /* --- SECTION II: WORD FORM --- */
+        function toggleWordTable() {
+            playSound('click');
+            const drawer = document.getElementById('word-family-drawer');
+            const btnText = document.getElementById('btn-word-table-text');
+            drawer.classList.toggle('hidden');
+            btnText.innerText = drawer.classList.contains('hidden') ? 'Mở Bảng Tra Cứu Từ Loại' : 'Ẩn Bảng Tra Cứu Từ Loại';
+        }
+
+        function renderWF() {
+            const container = document.getElementById('wf-container');
+            container.innerHTML = wfData.map(item => {
+                const state = appState.wfAnswers[item.id] || { value: '', isCorrect: null };
+                let borderClass = "border-gold-200 focus:border-gold-500";
+                let statusBadge = "";
+
+                if (state.isCorrect === true) {
+                    borderClass = "border-emerald-500 bg-emerald-50/40 text-emerald-900 font-semibold";
+                    statusBadge = `<span class="text-xs font-bold text-emerald-600 flex items-center gap-1"><i class="fa-solid fa-check"></i> Chính xác</span>`;
+                } else if (state.isCorrect === false) {
+                    borderClass = "border-rose-400 bg-rose-50/40 text-rose-900";
+                    statusBadge = `<span class="text-xs font-bold text-rose-600 flex items-center gap-1"><i class="fa-solid fa-xmark"></i> Chưa đúng</span>`;
+                }
+
+                const formattedSentence = item.sentence.replace('_____', `
+                    <input type="text" id="wf-input-${item.id}" value="${escapeHtml(state.value)}"
+                        onkeydown="if(event.key==='Enter') checkSingleWF(${item.id})"
+                        oninput="updateWFInput(${item.id}, this.value)"
+                        placeholder="nhập từ..."
+                        class="inline-block w-36 sm:w-44 px-3 py-1 mx-1 rounded-lg border-2 ${borderClass} bg-white text-center text-sm focus:outline-none transition" />
+                `);
+
+                const feedbackHTML = state.isCorrect !== null ? `
+                    <div class="mt-3 pt-3 border-t border-gold-100 text-xs space-y-1">
+                        <div class="font-semibold text-charcoal">Đáp án chuẩn: <span class="text-emerald-700 underline">${item.answers.join(' / ')}</span></div>
+                        <div class="text-slate">${item.explain}</div>
+                    </div>
+                ` : '';
+
+                return `
+                    <div class="glass-card rounded-2xl p-5 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <span class="px-2.5 py-0.5 rounded-md bg-gold-100 text-gold-600 font-serif font-bold text-xs">Câu ${item.id}</span>
+                                <div class="flex items-center space-x-2">
+                                    ${statusBadge}
+                                    <span class="px-2.5 py-0.5 rounded-full bg-charcoal text-gold-300 text-xs font-semibold">(${item.hint})</span>
+                                </div>
+                            </div>
+                            <p class="text-sm sm:text-base text-charcoal leading-loose">
+                                ${formattedSentence}
+                            </p>
+                        </div>
+                        <div class="mt-4 flex justify-end">
+                            <button onclick="checkSingleWF(${item.id})" class="px-3.5 py-1.5 rounded-lg bg-gold-50 hover:bg-gold-100 border border-gold-300 text-gold-600 text-xs font-bold transition">
+                                Kiểm tra
+                            </button>
+                        </div>
+                        ${feedbackHTML}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function updateWFInput(id, val) {
+            if (!appState.wfAnswers[id]) appState.wfAnswers[id] = { value: '', isCorrect: null };
+            appState.wfAnswers[id].value = val;
+            saveState();
+        }
+
+        function checkSingleWF(id) {
+            const item = wfData.find(x => x.id === id);
+            const inputEl = document.getElementById(`wf-input-${id}`);
+            const rawVal = inputEl ? inputEl.value : (appState.wfAnswers[id]?.value || '');
+            const cleanVal = rawVal.trim().toLowerCase();
+
+            if (!cleanVal) {
+                showToast("Vui lòng nhập từ trước khi kiểm tra!", "warning");
+                playSound('click');
+                return;
+            }
+
+            const isRight = item.answers.some(ans => ans.toLowerCase() === cleanVal);
+            appState.wfAnswers[id] = { value: rawVal.trim(), isCorrect: isRight };
+
+            playSound(isRight ? 'correct' : 'wrong');
+            saveState();
+            renderWF();
+        }
+
+        function checkAllWordForms() {
+            let checkedCount = 0;
+            let rightCount = 0;
+            wfData.forEach(item => {
+                const inputEl = document.getElementById(`wf-input-${item.id}`);
+                const rawVal = inputEl ? inputEl.value : (appState.wfAnswers[item.id]?.value || '');
+                const cleanVal = rawVal.trim().toLowerCase();
+                if (cleanVal) {
+                    checkedCount++;
+                    const isRight = item.answers.some(ans => ans.toLowerCase() === cleanVal);
+                    if (isRight) rightCount++;
+                    appState.wfAnswers[item.id] = { value: rawVal.trim(), isCorrect: isRight };
+                }
+            });
+
+            if (checkedCount === 0) {
+                showToast("Bạn chưa điền câu nào ở Phần II!", "warning");
+                playSound('click');
+                return;
+            }
+
+            playSound(rightCount > checkedCount / 2 ? 'correct' : 'wrong');
+            saveState();
+            renderWF();
+            showToast(`Đã chấm ${checkedCount} câu: Đúng ${rightCount}/${checkedCount}!`, "success");
+        }
+
+        /* --- SECTION III: WRITE (SENTENCE ARRANGEMENT) --- */
+        function renderWrite() {
+            const container = document.getElementById('write-container');
+
+            container.innerHTML = writeData.map(item => {
+                const state = appState.writeAnswers[item.id];
+                const selectedIndices = state.selectedIndices || [];
+                const poolOrder = state.poolOrder || [...Array(item.chunks.length).keys()];
+
+                // Build Answer Slot Chips
+                const selectedHTML = selectedIndices.length > 0
+                    ? selectedIndices.map((chunkIdx, pos) => `
+                        <button onclick="removeWriteChip(${item.id}, ${pos})"
+                            class="word-chip px-3.5 py-2 rounded-xl bg-charcoal text-white font-medium text-sm shadow-sm hover:bg-gold-600 flex items-center space-x-1.5">
+                            <span>${escapeHtml(item.chunks[chunkIdx])}</span>
+                            <i class="fa-solid fa-xmark text-[10px] text-gold-300 opacity-75"></i>
+                        </button>
+                    `).join('')
+                    : `<span class="text-xs text-gray-400 italic py-2">Bấm vào các mảnh từ bên dưới để ghép thành câu hoàn chỉnh tại đây...</span>`;
+
+                // Build Available Word Pool Chips
+                const poolHTML = poolOrder.map(chunkIdx => {
+                    const isUsed = selectedIndices.includes(chunkIdx);
+                    if (isUsed) {
+                        return `<span class="px-3.5 py-2 rounded-xl border border-dashed border-gray-200 bg-gray-50 text-gray-300 text-sm select-none">${escapeHtml(item.chunks[chunkIdx])}</span>`;
+                    }
+                    return `
+                        <button onclick="addWriteChip(${item.id}, ${chunkIdx})"
+                            class="word-chip px-3.5 py-2 rounded-xl bg-white border border-gold-300 hover:border-gold-500 hover:bg-gold-50 text-charcoal font-medium text-sm shadow-sm">
+                            ${escapeHtml(item.chunks[chunkIdx])}
+                        </button>
+                    `;
+                }).join('');
+
+                // Result Banner
+                let resultBanner = '';
+                if (state.isCorrect === true) {
+                    resultBanner = `
+                        <div class="mt-4 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs sm:text-sm space-y-1">
+                            <div class="font-bold flex items-center gap-1.5 text-emerald-700"><i class="fa-solid fa-circle-check"></i> Xuất sắc! Câu sắp xếp hoàn toàn chính xác.</div>
+                            <div class="text-emerald-800">${item.explain}</div>
+                        </div>
+                    `;
+                } else if (state.isCorrect === false) {
+                    resultBanner = `
+                        <div class="mt-4 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-xs sm:text-sm space-y-1.5">
+                            <div class="font-bold flex items-center gap-1.5 text-rose-700"><i class="fa-solid fa-circle-xmark"></i> Thứ tự từ chưa chính xác.</div>
+                            <div><strong>Đáp án chuẩn:</strong> <span class="text-emerald-700 font-semibold">${escapeHtml(item.target)}</span></div>
+                            <div class="text-slate">${item.explain}</div>
+                        </div>
+                    `;
+                }
+
+                return `
+                    <div class="glass-card rounded-2xl p-5 sm:p-6">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                            <div class="flex items-center space-x-2">
+                                <span class="px-2.5 py-1 rounded-lg bg-gold-100 text-gold-600 font-serif font-bold text-sm">Câu ${item.id}</span>
+                                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-gold-50 text-gold-600 border border-gold-200">${item.type}</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button onclick="reshuffleWrite(${item.id})" title="Xáo trộn & làm lại câu này"
+                                    class="px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 text-slate text-xs font-medium flex items-center gap-1.5 transition">
+                                    <i class="fa-solid fa-shuffle"></i>
+                                    <span>Xáo trộn lại</span>
+                                </button>
+                                <button onclick="checkWriteSentence(${item.id})"
+                                    class="px-4 py-1.5 rounded-lg gold-gradient-bg text-white text-xs font-bold shadow-sm hover:opacity-95 flex items-center gap-1.5 transition">
+                                    <i class="fa-solid fa-check"></i>
+                                    <span>Kiểm tra</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Original Prompt Sentence -->
+                        <div class="p-3.5 rounded-xl bg-ivory border border-gold-200/80 text-sm sm:text-base font-medium text-charcoal mb-4">
+                            <span class="text-gold-600 font-bold mr-1">Đề bài:</span> ${escapeHtml(item.prompt)}
+                        </div>
+
+                        <!-- Selected Sentence Dropzone -->
+                        <div class="min-h-[56px] p-3 rounded-xl bg-gold-50/40 border-2 border-dashed border-gold-300 flex flex-wrap gap-2 items-center mb-4">
+                            ${selectedHTML}
+                        </div>
+
+                        <!-- Shuffled Word Chips Pool -->
+                        <div class="flex flex-wrap gap-2">
+                            ${poolHTML}
+                        </div>
+
+                        ${resultBanner}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function addWriteChip(qId, chunkIdx) {
+            playSound('click');
+            const state = appState.writeAnswers[qId];
+            if (!state.selectedIndices.includes(chunkIdx)) {
+                state.selectedIndices.push(chunkIdx);
+                state.isCorrect = null;
+                saveState();
+                renderWrite();
+            }
+        }
+
+        function removeWriteChip(qId, posIdx) {
+            playSound('click');
+            const state = appState.writeAnswers[qId];
+            state.selectedIndices.splice(posIdx, 1);
+            state.isCorrect = null;
+            saveState();
+            renderWrite();
+        }
+
+        function reshuffleWrite(qId) {
+            playSound('click');
+            const item = writeData.find(x => x.id === qId);
+            appState.writeAnswers[qId] = {
+                selectedIndices: [],
+                poolOrder: shuffleArray([...Array(item.chunks.length).keys()]),
+                isCorrect: null
+            };
+            saveState();
+            renderWrite();
+        }
+
+        function checkWriteSentence(qId) {
+            const item = writeData.find(x => x.id === qId);
+            const state = appState.writeAnswers[qId];
+
+            if (state.selectedIndices.length < item.chunks.length) {
+                showToast("Bạn chưa chọn hết các mảnh từ của câu này!", "warning");
+                playSound('click');
+                return;
+            }
+
+            const builtSentence = state.selectedIndices.map(idx => item.chunks[idx]).join(' ');
+            const isRight = builtSentence.trim() === item.target.trim();
+            state.isCorrect = isRight;
+
+            playSound(isRight ? 'correct' : 'wrong');
+            saveState();
+            renderWrite();
+        }
+
+        /* =========================================================================
+           5. PROGRESS COUNTERS & ANALYTICS DASHBOARD (CHARTS + ROADMAP)
+           ========================================================================= */
+        let pieChartInstance = null;
+        let barChartInstance = null;
+
+        function computeStats() {
+            // Sec 1
+            let s1Correct = 0, s1Wrong = 0;
+            mcData.forEach(item => {
+                const ans = appState.mcAnswers[item.id];
+                if (ans !== undefined) {
+                    if (ans === item.answer) s1Correct++;
+                    else s1Wrong++;
+                }
+            });
+            const s1Unanswered = mcData.length - s1Correct - s1Wrong;
+
+            // Sec 2
+            let s2Correct = 0, s2Wrong = 0;
+            wfData.forEach(item => {
+                const st = appState.wfAnswers[item.id];
+                if (st && st.isCorrect !== null) {
+                    if (st.isCorrect) s2Correct++;
+                    else s2Wrong++;
+                }
+            });
+            const s2Unanswered = wfData.length - s2Correct - s2Wrong;
+
+            // Sec 3
+            let s3Correct = 0, s3Wrong = 0;
+            writeData.forEach(item => {
+                const st = appState.writeAnswers[item.id];
+                if (st && st.isCorrect !== null) {
+                    if (st.isCorrect) s3Correct++;
+                    else s3Wrong++;
+                }
+            });
+            const s3Unanswered = writeData.length - s3Correct - s3Wrong;
+
+            const totalQuestions = 48;
+            const totalCorrect = s1Correct + s2Correct + s3Correct;
+            const totalWrong = s1Wrong + s2Wrong + s3Wrong;
+            const totalAnswered = totalCorrect + totalWrong;
+            const totalUnanswered = totalQuestions - totalAnswered;
+            const score10 = ((totalCorrect / totalQuestions) * 10).toFixed(1);
+
+            return {
+                s1: { correct: s1Correct, wrong: s1Wrong, unanswered: s1Unanswered, total: 22 },
+                s2: { correct: s2Correct, wrong: s2Wrong, unanswered: s2Unanswered, total: 16 },
+                s3: { correct: s3Correct, wrong: s3Wrong, unanswered: s3Unanswered, total: 10 },
+                totalCorrect, totalWrong, totalAnswered, totalUnanswered, totalQuestions, score10
+            };
+        }
+
+        function updateAllCounters() {
+            const st = computeStats();
+
+            // Header progress
+            const pct = Math.round((st.totalAnswered / st.totalQuestions) * 100);
+            document.getElementById('header-progress-bar').style.width = `${pct}%`;
+            document.getElementById('header-progress-text').innerText = `${st.totalAnswered}/48`;
+
+            // Nav badges
+            document.getElementById('badge-sec1').innerText = `${st.s1.correct + st.s1.wrong}/22`;
+            document.getElementById('badge-sec2').innerText = `${st.s2.correct + st.s2.wrong}/16`;
+            document.getElementById('badge-sec3').innerText = `${st.s3.correct + st.s3.wrong}/10`;
+
+            // Analytics KPIs
+            document.getElementById('kpi-score').innerHTML = `${st.score10} <span class="text-sm font-sans font-normal text-slate">/ 10</span>`;
+            document.getElementById('kpi-correct').innerText = st.totalCorrect;
+            document.getElementById('kpi-wrong').innerText = st.totalWrong;
+            document.getElementById('kpi-unanswered').innerText = st.totalUnanswered;
+
+            let rankText = "Hãy bắt đầu làm bài để xếp loại";
+            if (st.totalAnswered > 0) {
+                const s = parseFloat(st.score10);
+                if (s >= 9.0) rankText = "Xuất sắc • Bậc thầy Unit 4";
+                else if (s >= 7.5) rankText = "Giỏi • Nắm vững kiến thức";
+                else if (s >= 5.0) rankText = "Khá • Cần củng cố thêm";
+                else rankText = "Cần ôn tập trọng tâm ngay";
+            }
+            document.getElementById('kpi-rank').innerText = rankText;
+
+            // Update charts if Tab 4 is visible
+            if (!document.getElementById('tab-4').classList.contains('hidden')) {
+                renderCharts();
+            }
+        }
+
+        function renderCharts() {
+            const st = computeStats();
+            const isAnimated = appState.settings.quality !== 'low';
+
+            // 1. Pie / Doughnut Chart
+            const pieCtx = document.getElementById('pieChart').getContext('2d');
+            if (pieChartInstance) pieChartInstance.destroy();
+
+            pieChartInstance = new Chart(pieCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Câu Đúng', 'Câu Sai', 'Chưa Làm'],
+                    datasets: [{
+                        data: [st.totalCorrect, st.totalWrong, st.totalUnanswered],
+                        backgroundColor: ['#10B981', '#F43F5E', '#E5E7EB'],
+                        borderColor: '#FFFFFF',
+                        borderWidth: 3,
+                        hoverOffset: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: isAnimated ? { duration: 700 } : false,
+                    cutout: '62%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { font: { family: 'Inter', weight: '600' }, padding: 16 }
+                        }
+                    }
+                }
+            });
+
+            // 2. Bar Chart
+            const barCtx = document.getElementById('barChart').getContext('2d');
+            if (barChartInstance) barChartInstance.destroy();
+
+            barChartInstance = new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['I. Multiple Choice', 'II. Word Form', 'III. Write (Sắp xếp)'],
+                    datasets: [
+                        {
+                            label: 'Đúng',
+                            data: [st.s1.correct, st.s2.correct, st.s3.correct],
+                            backgroundColor: '#10B981',
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'Sai',
+                            data: [st.s1.wrong, st.s2.wrong, st.s3.wrong],
+                            backgroundColor: '#F43F5E',
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'Chưa làm',
+                            data: [st.s1.unanswered, st.s2.unanswered, st.s3.unanswered],
+                            backgroundColor: '#E5E7EB',
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    animation: isAnimated ? { duration: 700 } : false,
+                    scales: {
+                        x: { stacked: true, grid: { display: false } },
+                        y: { stacked: true, beginAtZero: true, ticks: { stepSize: 5 } }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { font: { family: 'Inter', weight: '600' }, padding: 16 }
+                        }
+                    }
+                }
+            });
+        }
+
+        function runDeepAnalysis() {
+            playSound('fanfare');
+            const st = computeStats();
+            const resultBox = document.getElementById('analysis-result-box');
+            const contentDiv = document.getElementById('analysis-content');
+            resultBox.classList.remove('hidden');
+
+            // Scan wrong items by knowledge category
+            const weaknessMap = {};
+
+            function addWeakness(category, ruleTip, questionRef) {
+                if (!weaknessMap[category]) {
+                    weaknessMap[category] = { count: 0, tip: ruleTip, refs: [] };
+                }
+                weaknessMap[category].count++;
+                weaknessMap[category].refs.push(questionRef);
+            }
+
+            // Analyze MC wrong answers
+            mcData.forEach(item => {
+                const ans = appState.mcAnswers[item.id];
+                if (ans !== undefined && ans !== item.answer) {
+                    let tip = "Ôn lại từ vựng chủ đề Ethnic Groups of Viet Nam (nhà sàn, ruộng bậc thang, cồng chiêng, dệt thổ cẩm).";
+                    if (item.topic.includes("V-ing") || item.topic.includes("to-V")) {
+                        tip = "Học thuộc nhóm động từ theo sau bởi V-ing (mind, avoid, enjoy) và to-V (plan, decide, want).";
+                    } else if (item.topic.includes("Lượng từ")) {
+                        tip = "Phân biệt danh từ đếm được (many, a few) và không đếm được (much, a little); dùng 'some' trong câu mời.";
+                    } else if (item.topic.includes("Liên từ")) {
+                        tip = "Nắm chắc cách dùng liên từ: But (nhưng), Although (mặc dù + mệnh đề), Therefore (do đó - sau dấu chấm phẩy).";
+                    } else if (item.topic.includes("Giới từ")) {
+                        tip = "Ghi nhớ cụm giới từ cố định: be made from (làm từ chất liệu), tell sb about sth.";
+                    }
+                    addWeakness(`Phần I - ${item.topic}`, tip, `Câu ${item.id}`);
+                }
+            });
+
+            // Analyze Word Form wrong answers
+            wfData.forEach(item => {
+                const wfSt = appState.wfAnswers[item.id];
+                if (wfSt && wfSt.isCorrect === false) {
+                    addWeakness(
+                        "Phần II - Chia loại từ (Word Form)",
+                        "Xác định vị trí từ cần điền trước khi chia: Sau mạo từ (a/an/the) là Danh từ; trước Danh từ là Tính từ; bổ nghĩa cho Động từ/Tính từ dùng Trạng từ đuôi -ly. Mở Bảng Tra Cứu Từ Loại ở Mục II để học thuộc 8 gốc từ.",
+                        `Câu ${item.id} (${item.hint})`
+                    );
+                }
+            });
+
+            // Analyze Write wrong answers
+            writeData.forEach(item => {
+                const wrSt = appState.writeAnswers[item.id];
+                if (wrSt && wrSt.isCorrect === false) {
+                    let tip = "Luyện cấu trúc viết lại câu với chủ ngữ giả: It + is + adj + to V.";
+                    if (item.type.includes("Yes / No")) {
+                        tip = "Quy tắc đặt câu hỏi Yes/No: Đưa to-be (Are) hoặc trợ động từ (Do/Did/Can) lên đầu câu và đưa động từ chính về nguyên mẫu.";
+                    } else if (item.type.includes("Wh-question")) {
+                        tip = "Quy tắc đặt câu hỏi Wh-: Từ để hỏi (How many / Where / How) + trợ động từ/to-be + chủ ngữ + động từ chính.";
+                    }
+                    addWeakness(`Phần III - ${item.type}`, tip, `Câu ${item.id}`);
+                }
+            });
+
+            const entries = Object.entries(weaknessMap).sort((a, b) => b[1].count - a[1].count);
+
+            if (st.totalAnswered === 0) {
+                contentDiv.innerHTML = `
+                    <div class="p-5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-sm">
+                        <strong>Chưa có dữ liệu làm bài:</strong> Bạn chưa trả lời câu hỏi nào. Hãy làm thử ít nhất một vài câu ở Phần I, II hoặc III rồi nhấn lại nút Phân Tích nhé!
+                    </div>
+                `;
+            } else if (entries.length === 0) {
+                contentDiv.innerHTML = `
+                    <div class="p-5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 space-y-2">
+                        <div class="font-bold text-base text-emerald-800"><i class="fa-solid fa-trophy text-gold-500 mr-2"></i>Phong độ tuyệt vời! Bạn chưa làm sai câu nào trong số ${st.totalAnswered} câu đã làm.</div>
+                        <p class="text-sm"><strong>Phương hướng tiếp theo:</strong> ${st.totalUnanswered > 0 ? `Hãy hoàn thành nốt <strong>${st.totalUnanswered} câu còn lại</strong> để đạt điểm tuyệt đối 10/10.` : `Bạn đã chinh phục trọn vẹn 48/48 câu hỏi của Review Unit 4. Sẵn sàng bước vào kỳ thi!`}</p>
+                    </div>
+                `;
+            } else {
+                const cardsHTML = entries.map(([cat, info], idx) => `
+                    <div class="p-4 rounded-xl bg-white border border-gold-200 shadow-sm space-y-2">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <span class="font-bold text-charcoal text-sm sm:text-base flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-full bg-rose-100 text-rose-600 text-xs font-bold flex items-center justify-center">${idx + 1}</span>
+                                ${cat}
+                            </span>
+                            <span class="px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200 text-xs font-bold">
+                                Sai ${info.count} câu (${info.refs.join(', ')})
+                            </span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate leading-relaxed">
+                            <strong class="text-gold-600">Phương hướng khắc phục:</strong> ${info.tip}
+                        </p>
+                    </div>
+                `).join('');
+
+                contentDiv.innerHTML = `
+                    <div class="p-4 rounded-xl bg-gold-50/80 border border-gold-300 text-sm text-charcoal">
+                        Hệ thống phát hiện <strong>${st.totalWrong} câu sai</strong> tập trung ở <strong>${entries.length} mảng kiến thức</strong> dưới đây. Bạn nên ưu tiên ôn tập theo thứ tự từ trên xuống dưới:
+                    </div>
+                    <div class="space-y-3">
+                        ${cardsHTML}
+                    </div>
+                `;
+            }
+
+            resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        /* =========================================================================
+           6. NAVIGATION TABS & SETTINGS MODAL
+           ========================================================================= */
+        function switchTab(tabId) {
+            playSound('click');
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-tab').forEach(btn => {
+                btn.classList.remove('active-tab', 'bg-charcoal', 'text-white', 'shadow-md');
+                btn.classList.add('text-slate', 'hover:bg-gold-50');
+                const badge = btn.querySelector('.tab-badge');
+                if (badge) {
+                    badge.classList.remove('bg-gold-400', 'text-charcoal');
+                    badge.classList.add('bg-gold-100', 'text-gold-600');
+                }
+            });
+
+            const activeBtn = document.getElementById(`nav-${tabId}`);
+            activeBtn.classList.add('active-tab', 'bg-charcoal', 'text-white', 'shadow-md');
+            activeBtn.classList.remove('text-slate', 'hover:bg-gold-50');
+            const activeBadge = activeBtn.querySelector('.tab-badge');
+            if (activeBadge) {
+                activeBadge.classList.remove('bg-gold-100', 'text-gold-600');
+                activeBadge.classList.add('bg-gold-400', 'text-charcoal');
+            }
+
+            if (tabId === 'tab-4') {
+                updateAllCounters();
+                renderCharts();
+            }
+        }
+
+        function openSettingsModal() {
+            playSound('click');
+            document.getElementById('settings-modal').classList.remove('hidden');
+            updateQualityButtonsUI();
+            updateSoundUI();
+            cancelResetConfirm();
+        }
+
+        function closeSettingsModal() {
+            playSound('click');
+            document.getElementById('settings-modal').classList.add('hidden');
+        }
+
+        function setQuality(tier) {
+            playSound('click');
+            appState.settings.quality = tier;
+            document.body.classList.remove('quality-high', 'quality-medium', 'quality-low');
+            document.body.classList.add(`quality-${tier}`);
+            updateQualityButtonsUI();
+            saveState();
+
+            const canvas = document.getElementById('gold-particles');
+            if (tier === 'high') {
+                canvas.style.display = 'block';
+                startParticles();
+            } else {
+                canvas.style.display = 'none';
+                stopParticles();
+            }
+        }
+
+        function updateQualityButtonsUI() {
+            ['high', 'medium', 'low'].forEach(t => {
+                const btn = document.getElementById(`q-btn-${t}`);
+                if (appState.settings.quality === t) {
+                    btn.className = 'q-btn p-3 rounded-xl border-2 border-gold-400 bg-gold-50 text-charcoal text-center transition shadow-sm';
+                } else {
+                    btn.className = 'q-btn p-3 rounded-xl border border-gray-200 bg-white text-slate hover:bg-gray-50 text-center transition';
+                }
+            });
+        }
+
+        function showResetConfirm() {
+            playSound('click');
+            document.getElementById('reset-confirm-area').classList.add('hidden');
+            document.getElementById('reset-double-check').classList.remove('hidden');
+        }
+
+        function cancelResetConfirm() {
+            document.getElementById('reset-confirm-area').classList.remove('hidden');
+            document.getElementById('reset-double-check').classList.add('hidden');
+        }
+
+        function executeReset() {
+            playSound('wrong');
+            appState.mcAnswers = {};
+            appState.wfAnswers = {};
+            appState.writeAnswers = {};
+            appState.sec1Index = 0;
+            appState.sec2Index = 0;
+            appState.sec3Index = 0;
+            appState.sec1Order = generateOrderArray(mcData.length, appState.orderMode);
+            appState.sec2Order = generateOrderArray(wfData.length, appState.orderMode);
+            appState.sec3Order = generateOrderArray(writeData.length, appState.orderMode);
+
+            writeData.forEach(item => {
+                appState.writeAnswers[item.id] = {
+                    selectedIndices: [],
+                    poolOrder: shuffleArray([...Array(item.chunks.length).keys()]),
+                    isCorrect: null
+                };
+            });
+            saveState();
+            renderMC();
+            renderWF();
+            renderWrite();
+            document.getElementById('analysis-result-box').classList.add('hidden');
+            closeSettingsModal();
+            showToast("Đã làm mới toàn bộ bài làm!", "success");
+        }
+
+        /* =========================================================================
+           7. AMBIENT GOLD DUST PARTICLES (HIGH QUALITY MODE)
+           ========================================================================= */
+        let particleAnimId = null;
+        let particles = [];
+
+        function startParticles() {
+            if (particleAnimId) return;
+            const canvas = document.getElementById('gold-particles');
+            const ctx = canvas.getContext('2d');
+
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            particles = Array.from({ length: 32 }, () => ({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 2.2 + 0.8,
+                vx: (Math.random() - 0.5) * 0.35,
+                vy: -Math.random() * 0.45 - 0.15,
+                alpha: Math.random() * 0.5 + 0.2
+            }));
+
+            function loop() {
+                if (appState.settings.quality !== 'high') {
+                    particleAnimId = null;
+                    return;
+                }
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.y < -10) p.y = canvas.height + 10;
+                    if (p.x < -10) p.x = canvas.width + 10;
+                    if (p.x > canvas.width + 10) p.x = -10;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(212, 175, 55, ${p.alpha})`;
+                    ctx.fill();
+                });
+                particleAnimId = requestAnimationFrame(loop);
+            }
+            loop();
+        }
+
+        function stopParticles() {
+            if (particleAnimId) {
+                cancelAnimationFrame(particleAnimId);
+                particleAnimId = null;
+            }
+        }
+
+        /* =========================================================================
+           8. HELPERS & INITIALIZATION
+           ========================================================================= */
+        function escapeHtml(str) {
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+
+        let toastTimer = null;
+        function showToast(msg, type = 'info') {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toast-icon');
+            document.getElementById('toast-msg').innerText = msg;
+
+            if (type === 'success') icon.className = 'fa-solid fa-circle-check text-emerald-400';
+            else if (type === 'warning') icon.className = 'fa-solid fa-triangle-exclamation text-gold-400';
+            else icon.className = 'fa-solid fa-circle-info text-gold-400';
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        window.onload = function () {
+            loadState();
+            setQuality(appState.settings.quality);
+            updateSoundUI();
+            updateOrderButtonsUI();
+            updateUsernameUI();
+            initSocketForum();
+
+            if (appState.username) {
+                document.getElementById('welcome-modal').classList.add('hidden');
+            }
+            if (appState.localForumMsgs && appState.localForumMsgs.length > 0 && window.renderForumMessages) {
+                window.renderForumMessages(appState.localForumMsgs);
+            }
+
+            renderMC();
+            renderWF();
+            renderWrite();
+            updateAllCounters();
+
+            // Initialize active tab styling
+            const initialTab = document.getElementById('nav-tab-1');
+            initialTab.classList.add('bg-charcoal', 'text-white', 'shadow-md');
+            initialTab.querySelector('.tab-badge').classList.add('bg-gold-400', 'text-charcoal');
+        };
+    </script>
+</body>
+</html>
